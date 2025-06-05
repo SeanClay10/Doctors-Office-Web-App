@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient Login</title>
+</head>
+<body>
+  <h1>Patient Login</h1>
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  <form action="/login" method="POST">
+    <input type="hidden" name="role" value="patient">
+    <label for="ssn">Patient ID:</label>
+    <input type="text" name="ssn" id="ssn" required>
+    <button type="submit">Login</button>
+    <button type="button" onclick="window.location.href='/'">Back</button>
+  </form>
+</body>
+</html>

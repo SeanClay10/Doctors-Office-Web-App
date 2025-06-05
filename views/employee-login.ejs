@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Login</title>
+</head>
+<body>
+  <h1>Employee Login</h1>
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  <form action="/login" method="POST">
+    <input type="hidden" name="role" value="employee">
+    <label for="ssn">Employee ID:</label>
+    <input type="text" name="ssn" id="ssn" required>
+    <button type="submit">Login</button>
+    <button type="button" onclick="window.location.href='/'">Back</button>
+  </form>
+</body>
+</html>
