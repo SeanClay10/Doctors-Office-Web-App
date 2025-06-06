@@ -34,8 +34,12 @@ app.get('/login/patient', (req, res) => {
   res.render('patient-login', { error: null });
 });
 
-app.get('/new-user-dashboard', (req, res) => {
-  res.render('new-user-dashboard', { error: null });
+app.get('/new-user-dashboard', async (req, res) => {
+  const getOfficeData = require('./services/office-data');
+  const getDoctorData = require('./services/doctor-data');
+  const offices = await getOfficeData();
+  const doctors = await getDoctorData();
+  res.render('new-user-dashboard', { offices, doctors });
 });
 
 // Server Startup
