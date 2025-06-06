@@ -1,62 +1,91 @@
 <!-- HTML for Patient Dashboard -->
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Patient Dashboard</title>
-</head>
-<body>
-  <h1>Welcome, <%= fname %>!</h1>
+  <head>
+    <title>Patient Dashboard</title>
+  </head>
+  <body>
+    <h1>Welcome, <%= fname %>!</h1>
 
-  <div>
-    <h2>Instructions</h2>
-    <p>View all office locations, doctors, and your personal appointments and billing statements.</p>
-  </div>
+    <div>
+      <h2>Instructions</h2>
+      <p>
+        View all office locations, doctors, and your personal appointments and
+        billing statements.
+      </p>
+    </div>
 
-  <div>
-    <h3>Offices</h3>
-    <table border="1">
-      <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Phone Number</th>
-      </tr>
-      <% offices.forEach(office => { %>
+    <div>
+      <h3>Offices</h3>
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+        </tr>
+        <% offices.forEach(office => { %>
         <tr>
           <td><%= office.office_name %></td>
           <td><%= office.location %></td>
           <td><%= office.phone_number %></td>
         </tr>
-      <% }) %>
-    </table>
-  </div>
+        <% }) %>
+      </table>
+    </div>
 
-  <div>
-    <h3>Doctors</h3>
-    <table border="1">
-      <tr>
-        <th>Name</th>
-        <th>Specialization</th>
-      </tr>
-      <% doctors.forEach(doc => { %>
+    <div>
+      <h3>Doctors</h3>
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Specialization</th>
+        </tr>
+        <% doctors.forEach(doc => { %>
         <tr>
           <td><%= doc.fname %> <%= doc.lname %></td>
           <td><%= doc.specialization %></td>
         </tr>
-      <% }) %>
-    </table>
-  </div>
+        <% }) %>
+      </table>
+    </div>
 
-  <div>
-    <h3>Upcoming Appointments</h3>
-    <table border="1">
-      <tr>
-        <th>Date</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Doctor</th>
-        <th>Note</th>
-      </tr>
-      <% appointmentsUpcoming.forEach(app => { %>
+    <div>
+      <h3>Upcoming Appointments</h3>
+      <table border="1">
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Doctor</th>
+          <th>Note</th>
+          <th>Cancel Appointment</th>
+        </tr>
+        <% appointmentsUpcoming.forEach(app => { %>
+        <tr>
+          <td><%= app.date %></td>
+          <td><%= app.start_time %></td>
+          <td><%= app.end_time %></td>
+          <td><%= app.doctor_name %></td>
+          <td><%= app.note || '—' %></td>
+          <td>
+            <button type="button" onclick="">Yes</button>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+
+    <div>
+      <h3>Past Appointments</h3>
+      <table border="1">
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Doctor</th>
+          <th>Note</th>
+        </tr>
+        <% appointmentsPast.forEach(app => { %>
         <tr>
           <td><%= app.date %></td>
           <td><%= app.start_time %></td>
@@ -64,50 +93,28 @@
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
         </tr>
-      <% }) %>
-    </table>
-  </div>
+        <% }) %>
+      </table>
+    </div>
 
-  <div>
-    <h3>Past Appointments</h3>
-    <table border="1">
-      <tr>
-        <th>Date</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Doctor</th>
-        <th>Note</th>
-      </tr>
-      <% appointmentsPast.forEach(app => { %>
+    <div>
+      <h3>My Billing Statements</h3>
+      <table border="1">
         <tr>
-          <td><%= app.date %></td>
-          <td><%= app.start_time %></td>
-          <td><%= app.end_time %></td>
-          <td><%= app.doctor_name %></td>
-          <td><%= app.note || '—' %></td>
+          <th>Amount</th>
+          <th>Billing Date</th>
+          <th>Due Date</th>
         </tr>
-      <% }) %>
-    </table>
-  </div>
-
-  <div>
-    <h3>My Billing Statements</h3>
-    <table border="1">
-      <tr>
-        <th>Amount</th>
-        <th>Billing Date</th>
-        <th>Due Date</th>
-      </tr>
-      <% bills.forEach(bill => { %>
+        <% bills.forEach(bill => { %>
         <tr>
           <td>$<%= bill.amount_due.toFixed(2) %></td>
           <td><%= bill.billing_date %></td>
           <td><%= bill.due_date %></td>
         </tr>
-      <% }) %>
-    </table>
-  </div>
-  <p> </p>
-  <button type="button" onclick="window.location.href='/'">Log Out</button>
-</body>
+        <% }) %>
+      </table>
+    </div>
+    <p></p>
+    <button type="button" onclick="window.location.href='/'">Log Out</button>
+  </body>
 </html>
