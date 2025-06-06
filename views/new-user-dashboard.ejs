@@ -6,18 +6,53 @@
 </head>
 <body>
   <h1>Welcome!</h1>
+
   <div>
     <h2>Instructions</h2>
-    <p>Text Here</p>
+    <p>You can browse our office locations and meet our doctors before registering as a patient.</p>
   </div>
+
   <div>
-    <h3>Data tables</h3>
+    <h3>Data Tables</h3>
+
     <div>
       <h4>Offices</h4>
+      <table border="1">
+        <tr>
+          <th>Office Name</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+        </tr>
+        <% offices.forEach(office => { %>
+          <tr>
+            <td><%= office.office_name %></td>
+            <td><%= office.location %></td>
+            <td><%= office.phone_number %></td>
+          </tr>
+        <% }) %>
+      </table>
     </div>
-    <div>
+
+    <div style="margin-top: 30px;">
       <h4>Doctors</h4>
+      <table border="1">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Specialization</th>
+        </tr>
+        <% doctors.forEach(doc => { %>
+          <tr>
+            <td><%= doc.fname %></td>
+            <td><%= doc.lname %></td>
+            <td><%= doc.specialization %></td>
+          </tr>
+        <% }) %>
+      </table>
     </div>
+
   </div>
+  <p> </p>
+  <button type="button" onclick="window.location.href='/'">Back to Login</button>
 </body>
 </html>
