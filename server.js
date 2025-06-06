@@ -18,9 +18,14 @@ app.get('/', (req, res) => {
   res.render('main-page', { error: null });
 });
 
+// Backend API routes
 const loginRoutes = require('./routes/login');
-app.use('/login', loginRoutes);
+const patientRoutes = require('./routes/patient-access');
 
+app.use('/login', loginRoutes);
+app.use('/patient', patientRoutes);
+
+// Frontend pages
 app.get('/login/employee', (req, res) => {
   res.render('employee-login', { error: null });
 });
