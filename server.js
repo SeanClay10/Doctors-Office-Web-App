@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 
 // Route Definitions
 app.get('/', (req, res) => {
-  res.render('index', { error: null });
+  res.render('main-page', { error: null });
 });
 
 const loginRoutes = require('./routes/login');
@@ -29,7 +29,9 @@ app.get('/login/patient', (req, res) => {
   res.render('patient-login', { error: null });
 });
 
-app.use('/new-user', require('./routes/new-user'));
+app.get('/new-user-dashboard', (req, res) => {
+  res.render('new-user-dashboard', { error: null });
+});
 
 // Server Startup
 app.listen(PORT, () => {
