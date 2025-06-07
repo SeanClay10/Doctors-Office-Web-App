@@ -10,7 +10,4 @@ router.get("/dashboard/:fname/:ssn", (req, res) => {
   res.render("employee-dashboard", { fname, ssn });
 });
 
-
-
-
 module.exports = router;

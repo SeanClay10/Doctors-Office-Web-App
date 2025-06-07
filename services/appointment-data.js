@@ -2,7 +2,7 @@
 
 const db = require("../db/connection");
 
-async function getApptsForPatient(ssn) {
+async function getAppointmentsForPatient(ssn) {
   return new Promise((resolve, reject) => {
     db.query(
       `SELECT A.date, A.start_time, A.end_time, A.note, E.fname AS doctor_fname, E.lname AS doctor_lname 
@@ -48,9 +48,30 @@ async function getApptsForPatient(ssn) {
   });
 }
 
-async function getAllAppts() {}
+async function getAllAppointments() {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT A.date, A.start_time, A.end_time, A.note, E.fname AS doctor_fname, E.lname AS doctor_lname 
+            FROM Appointment A
+            JOIN Doctor D ON A.employee_id = D.employee_id
+            JOIN Employee E ON D.employee_id = E.employee_id`,
+      [],
+      (err, results) => {
+        if (err) reject(err);
+
+        resolve(results);
+      }
+    );
+  });
+}
+
+async function addAppointment() {}
+
+async function updateAppointment() {}
+
+async function deleteAppointment(apptId, id, role) {}
 
 module.exports = {
-  getApptsForPatient: getApptsForPatient,
-  getAllAppts: getAllAppts,
+  getAppointmentsForPatient: getAppointmentsForPatient,
+  getAllAppointments: getAllAppointments,
 };
