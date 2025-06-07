@@ -1,3 +1,4 @@
+
 const db = require("../db/connection");
 
 async function loginHandler(req, res) {
@@ -21,7 +22,7 @@ async function loginHandler(req, res) {
       // Return dashboard or error
       if (results.length > 0) {
         const fname = results[0].fname;
-        return res.render("employee-dashboard", { fname, ssn });
+        return res.redirect(`employee-dashboard/${fname}/${ssn}`);
       } else {
         return res.render("employee-login", { error: "Invalid Employee ID" });
       }
@@ -43,24 +44,19 @@ async function loginHandler(req, res) {
       // Return dashboard or error
       if (results.length > 0) {
         const fname = results[0].fname;
-        return res.render("patient-dashboard", { fname, ssn });
+
+        return res.redirect(`patient-dashboard/${fname}/${ssn}`);
       } else {
         return res.render("patient-login", { error: "Invalid Patient ID" });
       }
     }
-
-    // New user button
+    // New user selected
     else {
-      const getOfficeData = require("./office-data");
-      const getDoctorData = require("./doctor-data");
-      const offices = await getOfficeData();
-      const doctors = await getDoctorData();
-
-      res.render("new-user-dashboard", { offices, doctors });
+      res.redirect("new-user-dashboard");
     }
   } catch (err) {
     console.log(err);
-    res.render("main-page", { error: "Unexpected server error" });
+    res.redirect("main-page", { error: "Unexpected server error" });
   }
 }
 

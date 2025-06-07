@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
-const db = require('./db/connection');
+const getOfficeData = require('./services/office-data');
+const getDoctorData = require('./services/doctor-data');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +26,7 @@ const patientRoutes = require('./routes/patient-access');
 app.use('/login', loginRoutes);
 app.use('/patient', patientRoutes);
 
-// Frontend pages
+// // Frontend pages
 app.get('/login/employee', (req, res) => {
   res.render('employee-login', { error: null });
 });
@@ -34,13 +35,27 @@ app.get('/login/patient', (req, res) => {
   res.render('patient-login', { error: null });
 });
 
-app.get('/new-user-dashboard', async (req, res) => {
-  const getOfficeData = require('./services/office-data');
-  const getDoctorData = require('./services/doctor-data');
+app.get("/employee-dashboard/:fname/:ssn", (req, res) => {
+  const { fname, ssn } = req.params;
+
+  res.render("employee-dashboard", { fname, ssn });
+});
+
+app.get("/patient-dashboard/:fname/:ssn", async (req, res) => {
+  const { fname, ssn } = req.params;
   const offices = await getOfficeData();
   const doctors = await getDoctorData();
-  res.render('new-user-dashboard', { offices, doctors });
+
+  res.render("patient-dashboard", { fname, ssn });
 });
+
+app.get('/new-user-dashboard', async (req, res) => {
+  const offices = await getOfficeData();
+  const doctors = await getDoctorData();
+
+  res.render("new-user-dashboard", { offices, doctors });
+});
+
 
 // Server Startup
 app.listen(PORT, () => {
