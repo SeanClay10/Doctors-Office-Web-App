@@ -28,4 +28,12 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
   });
 });
 
+router.get('/delete-appt', (_, res) => {
+    const ssn = 123;
+    const testObj = ssn;
+
+    console.log("WORKED");
+    res.status(200).json(testObj);
+});
+
 module.exports = router;
