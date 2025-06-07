@@ -3,6 +3,8 @@
 <html>
   <head>
     <title>Patient Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/events/patient-events.js"></script>
   </head>
   <body>
     <h1>Welcome, <%= fname %>!</h1>
@@ -58,7 +60,7 @@
           <th>End</th>
           <th>Doctor</th>
           <th>Note</th>
-          <th>Cancel Appointment</th>
+          <th>Action</button></th>
         </tr>
         <% appointmentsUpcoming.forEach(app => { %>
         <tr>
@@ -68,7 +70,7 @@
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
           <td>
-            <button type="button" onclick="">Yes</button>
+            <button type="button" id="test">Cancel Appointment</button>
           </td>
         </tr>
         <% }) %>

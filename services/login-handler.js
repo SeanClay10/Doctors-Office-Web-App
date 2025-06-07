@@ -22,7 +22,7 @@ async function loginHandler(req, res) {
       // Return dashboard or error
       if (results.length > 0) {
         const fname = results[0].fname;
-        return res.redirect(`employee-dashboard/${fname}/${ssn}`);
+        return res.redirect(`/employee/dashboard/${fname}/${ssn}`);
       } else {
         return res.render("employee-login", { error: "Invalid Employee ID" });
       }
@@ -45,7 +45,7 @@ async function loginHandler(req, res) {
       if (results.length > 0) {
         const fname = results[0].fname;
 
-        return res.redirect(`patient-dashboard/${fname}/${ssn}`);
+        return res.redirect(`/patient/dashboard/${fname}/${ssn}`);
       } else {
         return res.render("patient-login", { error: "Invalid Patient ID" });
       }
