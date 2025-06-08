@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Billing Information</title>
+  </head>
+  <body>
+    <div>
+      <h2>Total Balance</h2>
+      <p>balance</p>
+      <h2>Billing Statements</h2>
+      <table border="1">
+        <tr>
+          <th>Amount</th>
+          <th>Billing Date</th>
+          <th>Due Date</th>
+        </tr>
+        <% bills.forEach(bill => { %>
+        <tr>
+          <td>$<%= bill.amount_due.toFixed(2) %></td>
+          <td><%= bill.billing_date %></td>
+          <td><%= bill.due_date %></td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    <br />
+    <button type="button" onclick="window.history.back()">Back</button>
+  </body>
+</html>

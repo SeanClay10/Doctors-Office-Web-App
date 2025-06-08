@@ -15,6 +15,7 @@ const {
 // const { getBillsForPatient } = require("../services/bill-data");
 const { getAllPatientData } = require("../services/patient-data");
 const { getAllEmployeeData } = require('../services/employee-data');
+const { getBillsForPatient } = require("../services/bill-data");
 
 router.get("/dashboard/:fname/:ssn", async (req, res) => {
   const { fname, ssn } = req.params;
@@ -32,6 +33,19 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
     doctors,
     patients,
   });
+});
+
+router.get('/view-patient-bill/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const bills = await getBillsForPatient(id);
+
+    res.render('patient/patient-bills', {
+      bills,
+    });
+  } catch (error) {
+    res.status(500).json( {success: false, message: error.message} );
+  }
 });
 
 module.exports = router;

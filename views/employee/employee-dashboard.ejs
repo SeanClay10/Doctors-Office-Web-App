@@ -73,7 +73,7 @@
               </button>
             </td>
             <td>
-              <button type="button" class="viewDoctorAppointmentsBtn">
+              <button type="button" class="viewDoctorAppointmentsBtn" doctorId="<%= doc.employee_id %>">
                 View Appointments
               </button>
             </td>
@@ -102,12 +102,12 @@
             <td><%= patient.email %></td>
             <td><%= patient.address %></td>
             <td>
-              <button type="button" class="viewPatientAppointmentsBtn">
+              <button type="button" class="viewPatientAppointmentsBtn" patientId="<%= patient.patient_id %>">
                 View Appointments
               </button>
             </td>
             <td>
-              <button type="button" class="viewPatientBillingStatementsBtn">
+              <button type="button" class="viewPatientBillingStatementsBtn" patientId="<%= patient.patient_id %>">
                 View Billing Info
               </button>
             </td>
