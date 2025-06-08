@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Info</title>
+</head>
+<body>
+    <h3>Upcoming Appointments</h3>
+      <button type="button" class="add-appt-btn">
+        Add Appointment
+      </button>
+      <table border="1">
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Patient</th>
+          <th>Note</th>
+          <th>Update</button></th>
+          <th>Delete</button></th>
+        </tr>
+        <% appointmentsUpcoming.forEach(app => { %>
+        <tr>
+          <td><%= app.date %></td>
+          <td>
+            <% if (app.start_time) { %>
+              <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td>
+            <% if (app.end_time) { %>
+              <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td><%= app.patient_name %></td>
+          <td><%= app.note || '—' %></td>
+          <td class="centered">
+            <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+              <img src="/images/update.png" alt="Update" width="31" height="24">
+            </button>
+          </td>
+          <td class="centered">
+            <button type="button" class="cancel-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+              <img src="/images/cancel.png" alt="Cancel" width="24" height="24">
+            </button>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    <div>
+      <h3>Past Appointments</h3>
+      <table border="1">
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Patient</th>
+          <th>Note</th>
+        </tr>
+        <% appointmentsPast.forEach(app => { %>
+        <tr>
+          <td><%= app.date %></td>
+          <td>
+            <% if (app.start_time) { %>
+              <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td>
+            <% if (app.end_time) { %>
+              <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td><%= app.patient_name %></td>
+          <td><%= app.note || '—' %></td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    <div>
+    <br />
+    <button type="button" onclick="window.history.back()">Back</button>
+</body>
+</html>

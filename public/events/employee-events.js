@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // View billing info for a specific patient
   document.querySelectorAll('.viewPatientBillingStatementsBtn').forEach((btn) => {
     btn.addEventListener('click', function () {
       const patientId = this.getAttribute('patientId');
@@ -25,4 +26,18 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = `/employee/view-patient-bill/${patientId}`;
     });
   });
+
+  // View appointments for a specific doctor
+  document.querySelectorAll('.viewDoctorAppointmentsBtn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const doctorId = this.getAttribute('doctorId');
+
+      if (!doctorId) {
+        console.error("Doctor ID not found");
+        return;
+      }
+      window.location.href = `/employee/view-doctor-appointments/${doctorId}`;
+    });
+  });
+
 });
