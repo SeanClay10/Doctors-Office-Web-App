@@ -21,7 +21,7 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
   const bills = await getBillsForPatient(ssn);
 
   // Load patient page
-  res.render("patient-dashboard", {
+  res.render("patient/patient-dashboard", {
     fname,
     ssn,
     offices,
@@ -47,7 +47,7 @@ router.delete('/appointment/:apptId/:ssn', async (req, res) => {
 router.get('/add-appointment/:fname/:ssn', async (req, res) => {
   const { fname, ssn } = req.params;
   const doctors = await getDoctorData();
-  res.render('add-appointment', { fname, ssn, doctors, error: null });
+  res.render('patient/add-appointment', { fname, ssn, doctors, error: null });
 });
 
 // Handle form submission
@@ -62,7 +62,7 @@ router.post('/add-appointment/:fname/:ssn', async (req, res) => {
   } catch (err) {
     console.error(err);
     const doctors = await getDoctorData();
-    res.render('add-appointment', { fname, ssn, doctors, error: 'Failed to add appointment.' });
+    res.render('patient/add-appointment', { fname, ssn, doctors, error: 'Failed to add appointment.' });
   }
 });
 
@@ -73,7 +73,7 @@ router.get('/update-appointment/:apptId/:fname/:ssn', async (req, res) => {
   const { pastAppointments, upcomingAppointments } = await getAppointmentsForPatient(ssn);
   // Find the appointment to update
   const appointment = [...pastAppointments, ...upcomingAppointments].find(a => a.appointment_id == apptId);
-  res.render('update-appointment', { fname, ssn, doctors, appointment, error: null });
+  res.render('patient/update-appointment', { fname, ssn, doctors, appointment, error: null });
 });
 
 // Handle update form submission
@@ -91,7 +91,7 @@ router.post('/update-appointment/:apptId/:fname/:ssn', async (req, res) => {
     const doctors = await getDoctorData();
     const { pastAppointments, upcomingAppointments } = await getAppointmentsForPatient(ssn);
     const appointment = [...pastAppointments, ...upcomingAppointments].find(a => a.appointment_id == apptId);
-    res.render('update-appointment', { fname, ssn, doctors, appointment, error: 'Failed to update appointment.' });
+    res.render('patient/update-appointment', { fname, ssn, doctors, appointment, error: 'Failed to update appointment.' });
   }
 });
 

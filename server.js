@@ -39,7 +39,7 @@ app.get("/new-user-dashboard", async (req, res) => {
   const doctors = await getDoctorData();
 
   // Load new user page
-  res.render("new-user-dashboard", { offices, doctors });
+  res.render("new-user/new-user-dashboard", { offices, doctors });
 });
 
 // Server Startup

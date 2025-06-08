@@ -1,4 +1,3 @@
-
 const db = require("../db/connection");
 
 async function loginHandler(req, res) {
@@ -24,7 +23,7 @@ async function loginHandler(req, res) {
         const fname = results[0].fname;
         return res.redirect(`/employee/dashboard/${fname}/${ssn}`);
       } else {
-        return res.render("employee-login", { error: "Invalid Employee ID" });
+        return res.render("employee/employee-login", { error: "Invalid Employee ID" });
       }
 
       // Patient selected
@@ -47,16 +46,16 @@ async function loginHandler(req, res) {
 
         return res.redirect(`/patient/dashboard/${fname}/${ssn}`);
       } else {
-        return res.render("patient-login", { error: "Invalid Patient ID" });
+        return res.render("patient/patient-login", { error: "Invalid Patient ID" });
       }
     }
     // New user selected
     else {
-      res.redirect("new-user-dashboard");
+      res.redirect("new-user/new-user-dashboard");
     }
   } catch (err) {
     console.log(err);
-    res.redirect("main-page", { error: "Unexpected server error" });
+    res.render("main-page", { error: "Unexpected server error" });
   }
 }
 

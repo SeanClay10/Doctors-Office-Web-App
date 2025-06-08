@@ -18,7 +18,7 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
   const offices = await getOfficeData();
   const doctors = await getDoctorData();
 
-  res.render("employee-dashboard", {
+  res.render("employee/employee-dashboard", {
     fname,
     ssn,
     offices,
