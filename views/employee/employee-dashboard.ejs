@@ -31,7 +31,22 @@
     </div>
     <div>
       <h3>Employees</h3>
-      <p>table showing employee data</p>
+      <table border="1">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+        </tr>
+        <% employees.forEach(employee => { %>
+        <tr>
+          <td><%= employee.employee_id %></td>
+          <td><%= employee.fname %> <%= employee.lname %></td>
+          <td><%= employee.phone_number %></td>
+          <td><%= employee.email %></td>
+        </tr>
+        <% }) %>
+      </table>
     </div>
     <div>
       <h3>Doctors</h3>
@@ -39,15 +54,15 @@
         <tr>
           <th>Name</th>
           <th>Specialization</th>
-          <th>Workplaces</th>
+          <th>Available Offices</th>
           <th>Appointments</th>
         </tr>
         <% doctors.forEach(doc => { %>
         <tr>
           <td><%= doc.fname %> <%= doc.lname %></td>
           <td><%= doc.specialization %></td>
-          <td>workplaces array</td>
-          <td>view appointments</td>
+          <td><button type="button" class="viewDoctorLocationsBtn">View Offices</button></td>
+          <td><button type="button" class="viewDoctorAppointmentsBtn">View Appointments</button></td>
         </tr>
         <% }) %>
       </table>
