@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require("../db/connection");
 
 const getOfficeData = require("../services/office-data");
-const getDoctorData = require("../services/doctor-data");
+const { getDoctorData } = require("../services/doctor-data");
 
 // Show registration form
-router.get("/register", (req, res) => {
+router.get("/register", (_, res) => {
   res.render("new-user/register-patient", { error: null });
 });
 
@@ -27,11 +27,11 @@ router.post("/register", async (req, res) => {
 });
 
 // Show registration success page
-router.get("/register-success", (req, res) => {
+router.get("/register-success", (_, res) => {
   res.render("new-user/register-success");
 });
 
-router.get("/new-user-dashboard", async (req, res) => {
+router.get("/new-user-dashboard", async (_, res) => {
   const offices = await getOfficeData();
   const doctors = await getDoctorData();
   res.render("new-user/new-user-dashboard", { offices, doctors });

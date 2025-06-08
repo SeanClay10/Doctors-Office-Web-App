@@ -1,59 +1,12 @@
-<!-- HTML for Patient Dashboard -->
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Patient Dashboard</title>
-    <script src="/events/patient-events.js"></script>
-  </head>
-  <body data-ssn="<%= ssn %>">
-    <h1>Welcome, <%= fname %>!</h1>
-
-    <div>
-      <h2>Instructions</h2>
-      <p>
-        View all office locations, doctors, and your personal appointments and
-        billing statements.
-      </p>
-    </div>
-
-    <div>
-      <h3>Offices</h3>
-      <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Phone Number</th>
-        </tr>
-        <% offices.forEach(office => { %>
-        <tr>
-          <td><%= office.office_name %></td>
-          <td><%= office.location %></td>
-          <td><%= office.phone_number %></td>
-        </tr>
-        <% }) %>
-      </table>
-    </div>
-
-    <div>
-      <h3>Doctors</h3>
-      <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Specialization</th>
-          <th>Offices</th>
-        </tr>
-        <% doctors.forEach(doc => { %>
-        <tr>
-          <td><%= doc.fname %> <%= doc.lname %></td>
-          <td><%= doc.specialization %></td>
-          <td><button type="button" class="viewDoctorLocationsBtn" doctorId="<%= doc.employee_id %>">View Available Offices</button></td>
-        </tr>
-        <% }) %>
-      </table>
-    </div>
-
-    <div>
-      <h3>Upcoming Appointments</h3>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Info</title>
+</head>
+<body>
+    <h3>Upcoming Appointments</h3>
       <button type="button" class="add-appt-btn">
         Add Appointment
       </button>
@@ -62,7 +15,7 @@
           <th>Date</th>
           <th>Start</th>
           <th>End</th>
-          <th>Doctor</th>
+          <th>Patient</th>
           <th>Note</th>
           <th>Update</button></th>
           <th>Delete</button></th>
@@ -84,7 +37,7 @@
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
+          <td><%= app.patient_name %></td>
           <td><%= app.note || '—' %></td>
           <td class="centered">
             <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
@@ -107,7 +60,7 @@
           <th>Date</th>
           <th>Start</th>
           <th>End</th>
-          <th>Doctor</th>
+          <th>Patient</th>
           <th>Note</th>
         </tr>
         <% appointmentsPast.forEach(app => { %>
@@ -127,30 +80,14 @@
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
+          <td><%= app.patient_name %></td>
           <td><%= app.note || '—' %></td>
         </tr>
         <% }) %>
       </table>
     </div>
     <div>
-      <h3>My Billing Statements</h3>
-      <table border="1">
-        <tr>
-          <th>Amount</th>
-          <th>Billing Date</th>
-          <th>Due Date</th>
-        </tr>
-        <% bills.forEach(bill => { %>
-        <tr>
-          <td>$<%= bill.amount_due.toFixed(2) %></td>
-          <td><%= bill.billing_date %></td>
-          <td><%= bill.due_date %></td>
-        </tr>
-        <% }) %>
-      </table>
-    </div>
-    <p></p>
-    <button type="button" onclick="window.location.href='/'">Log Out</button>
-  </body>
+    <br />
+    <button type="button" onclick="window.history.back()">Back</button>
+</body>
 </html>

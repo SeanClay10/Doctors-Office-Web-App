@@ -41,12 +41,14 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Specialization</th>
+          <th>Offices</th>
         </tr>
         <% doctors.forEach(doc => { %>
           <tr>
             <td><%= doc.fname %></td>
             <td><%= doc.lname %></td>
             <td><%= doc.specialization %></td>
+            <td><button type="button" class="viewDoctorLocationsBtn" doctorId="<%= doc.employee_id %>">View Available Offices</button></td>
           </tr>
         <% }) %>
       </table>

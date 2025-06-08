@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 // DB queries to grab initial data
 const getOfficeData = require("./services/office-data");
-const getDoctorData = require("./services/doctor-data");
+const { getDoctorData } = require("./services/doctor-data");
 
 // View Engine Setup
 app.set("view engine", "ejs");
@@ -26,11 +26,13 @@ const loginRoutes = require("./routes/login");
 const patientRoutes = require("./routes/patient-routes");
 const employeeRoutes = require('./routes/employee-routes');
 const newUserRoutes = require('./routes/new-user-routes');
+const commonRoutes = require('./routes/common-routes')
 
 app.use("/login", loginRoutes);
 app.use("/patient", patientRoutes);
 app.use("/employee", employeeRoutes);
 app.use('/new-user', newUserRoutes);
+app.use('/common', commonRoutes);
 
 // New user route -- No need to make a new route file, little logic required
 app.get("/new-user-dashboard", async (req, res) => {
