@@ -60,17 +60,37 @@
           <th>End</th>
           <th>Doctor</th>
           <th>Note</th>
-          <th>Action</button></th>
+          <th>Update</button></th>
+          <th>Delete</button></th>
         </tr>
         <% appointmentsUpcoming.forEach(app => { %>
         <tr>
           <td><%= app.date %></td>
-          <td><%= app.start_time %></td>
-          <td><%= app.end_time %></td>
+          <td>
+            <% if (app.start_time) { %>
+              <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td>
+            <% if (app.end_time) { %>
+              <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
-          <td>
-            <button type="button" id="test">Cancel Appointment</button>
+          <td class="centered">
+            <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+              <img src="/images/update.png" alt="Update" width="31" height="24">
+            </button>
+          </td>
+          <td class="centered">
+            <button type="button" class="cancel-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+              <img src="/images/cancel.png" alt="Cancel" width="24" height="24">
+            </button>
           </td>
         </tr>
         <% }) %>
@@ -90,14 +110,32 @@
         <% appointmentsPast.forEach(app => { %>
         <tr>
           <td><%= app.date %></td>
-          <td><%= app.start_time %></td>
-          <td><%= app.end_time %></td>
+          <td>
+            <% if (app.start_time) { %>
+              <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+          <td>
+            <% if (app.end_time) { %>
+              <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
         </tr>
         <% }) %>
       </table>
     </div>
+
+    <p></p>
+    <p></p>
+    <button type="button" class="add-appt-btn">
+      Add Appointment
+    </button>
 
     <div>
       <h3>My Billing Statements</h3>

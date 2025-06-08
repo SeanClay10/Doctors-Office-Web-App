@@ -1,20 +1,46 @@
 // File for handing event listeners for Patient dashboard
 
-document.addEventListener("DOMContentLoaded", () => {
-  const button = document.getElementById("test");
+document.addEventListener('DOMContentLoaded', function () {
 
-  // Handles case for no appointments
-  if (!button) return;
+  // Add appointment event
+  const addBtn = document.querySelector('.add-appt-btn');
+  if (addBtn) {
+    addBtn.addEventListener('click', function () {
+      const ssn = document.body.getAttribute('data-ssn');
+      const fname = document.querySelector('h1').textContent.replace('Welcome, ', '').replace('!', '');
+      window.location.href = `/patient/add-appointment/${fname}/${ssn}`;
+    });
+  }
 
-  const ssn = document.body.dataset.ssn;
+  // Cancel appointment event
+  document.querySelectorAll('.cancel-appt-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const apptId = this.getAttribute('data-appt-id');
+      const ssn = document.body.getAttribute('data-ssn');
+      if (confirm('Are you sure you want to cancel this appointment?')) {
+        try {
+          const res = await fetch(`/patient/appointment/${apptId}/${ssn}`, { method: 'DELETE' });
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            alert('Failed to cancel appointment.');
+          }
+        } catch (err) {
+          alert('Error cancelling appointment.');
+        }
+      }
+    });
+  });
 
-  // Listen for cancel appointment button
-  button.addEventListener("click", () => {
-    fetch(`/patient/delete-appointment/${ssn}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(typeof(data));
-        console.log(data);
-      });
+  // Update appointment event
+  document.querySelectorAll('.update-appt-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const apptId = this.getAttribute('data-appt-id');
+      const ssn = document.body.getAttribute('data-ssn');
+      const fname = document.querySelector('h1').textContent.replace('Welcome, ', '').replace('!', '');
+      window.location.href = `/patient/update-appointment/${apptId}/${fname}/${ssn}`;
+    });
   });
 });
+
+

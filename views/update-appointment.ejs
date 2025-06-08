@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Appointment</title>
+</head>
+<body>
+  <h1>Update Appointment</h1>
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  <form action="/patient/update-appointment/<%= appointment.appointment_id %>/<%= fname %>/<%= ssn %>" method="POST">
+    <label for="doctor_id">Doctor:</label>
+    <select name="doctor_id" id="doctor_id" required>
+      <% doctors.forEach(doc => { %>
+        <option value="<%= doc.employee_id %>" <%= doc.employee_id == appointment.doctor_id ? 'selected' : '' %>>
+          <%= doc.fname %> <%= doc.lname %> (<%= doc.specialization %>)
+        </option>
+      <% }) %>
+    </select><br><br>
+    <label for="start_time">Start Time:</label>
+    <input type="time" name="start_time" id="start_time"
+      value="<%= appointment.start_time && appointment.start_time.length === 8
+                ? appointment.start_time.slice(3)
+                : (appointment.start_time || '') %>" required><br><br>
+    <label for="note">Note:</label>
+    <input type="text" name="note" id="note" value="<%= appointment.note || '' %>"><br><br>
+    <button type="submit">Update</button>
+    <button type="button" onclick="window.location.href='/patient/dashboard/<%= fname %>/<%= ssn %>'">Cancel</button>
+  </form>
+</body>
+</html>

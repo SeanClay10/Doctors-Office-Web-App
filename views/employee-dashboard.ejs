@@ -13,13 +13,39 @@
   <div>
     <h3>Data Tables:</h3>
     <div>
-      <h4>Offices</h4>
+      <h3>Offices</h3>
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+        </tr>
+        <% offices.forEach(office => { %>
+        <tr>
+          <td><%= office.office_name %></td>
+          <td><%= office.location %></td>
+          <td><%= office.phone_number %></td>
+        </tr>
+        <% }) %>
+      </table>
     </div>
     <div>
       <h4>Employees</h4>
     </div>
     <div>
-      <h4>Doctors</h4>
+      <h3>Doctors</h3>
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Specialization</th>
+        </tr>
+        <% doctors.forEach(doc => { %>
+        <tr>
+          <td><%= doc.fname %> <%= doc.lname %></td>
+          <td><%= doc.specialization %></td>
+        </tr>
+        <% }) %>
+      </table>
     </div>
     <div>
       <h4>Patients</h4>
