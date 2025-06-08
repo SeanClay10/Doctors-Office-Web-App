@@ -26,11 +26,13 @@ const loginRoutes = require("./routes/login");
 const patientRoutes = require("./routes/patient-routes");
 const employeeRoutes = require('./routes/employee-routes');
 const newUserRoutes = require('./routes/new-user-routes');
+const commonRoutes = require('./routes/common-routes')
 
 app.use("/login", loginRoutes);
 app.use("/patient", patientRoutes);
 app.use("/employee", employeeRoutes);
 app.use('/new-user', newUserRoutes);
+app.use('/common', commonRoutes);
 
 // New user route -- No need to make a new route file, little logic required
 app.get("/new-user-dashboard", async (req, res) => {

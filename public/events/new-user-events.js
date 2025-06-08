@@ -6,4 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = '/new-user/register';
     });
   }
+
+  // View offices for a specific doctor event
+  document.querySelectorAll(".viewDoctorLocationsBtn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const doctorId = this.getAttribute("doctorId");
+      window.location.href = `/common/view-doctor-workplace/${doctorId}`;
+    });
+  });
 });

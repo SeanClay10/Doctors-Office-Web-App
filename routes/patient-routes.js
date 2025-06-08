@@ -5,10 +5,7 @@ const router = express.Router();
 
 // Import db queries
 const getOfficeData = require("../services/office-data");
-const {
-  getDoctorData,
-  getDoctorWorkplaces,
-} = require("../services/doctor-data");
+const { getDoctorData } = require("../services/doctor-data");
 const { getAppointmentsForPatient } = require("../services/appointment-data");
 const { getBillsForPatient } = require("../services/bill-data");
 const { deleteAppointment } = require("../services/appointment-data");
@@ -119,19 +116,6 @@ router.post("/update-appointment/:apptId/:fname/:ssn", async (req, res) => {
       appointment,
       error: "Failed to update appointment.",
     });
-  }
-});
-
-router.get("/view-doctor-workplace/:ssn", async (req, res) => {
-  const { ssn } = req.params;
-  try {
-    const offices = await getDoctorWorkplaces(ssn);
-    
-    res.render('commons/doctor-workplaces', {
-      offices,
-    });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
   }
 });
 
