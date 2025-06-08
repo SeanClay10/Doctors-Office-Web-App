@@ -40,11 +40,13 @@
         <tr>
           <th>Name</th>
           <th>Specialization</th>
+          <th>Offices</th>
         </tr>
         <% doctors.forEach(doc => { %>
         <tr>
           <td><%= doc.fname %> <%= doc.lname %></td>
           <td><%= doc.specialization %></td>
+          <td><button type="button" class="viewDoctorLocationsBtn" doctorId="<%= doc.employee_id %>">View Available Offices</button></td>
         </tr>
         <% }) %>
       </table>
@@ -52,6 +54,9 @@
 
     <div>
       <h3>Upcoming Appointments</h3>
+      <button type="button" class="add-appt-btn">
+        Add Appointment
+      </button>
       <table border="1">
         <tr>
           <th>Date</th>
@@ -95,7 +100,6 @@
         <% }) %>
       </table>
     </div>
-
     <div>
       <h3>Past Appointments</h3>
       <table border="1">
@@ -129,13 +133,6 @@
         <% }) %>
       </table>
     </div>
-
-    <p></p>
-    <p></p>
-    <button type="button" class="add-appt-btn">
-      Add Appointment
-    </button>
-
     <div>
       <h3>My Billing Statements</h3>
       <table border="1">

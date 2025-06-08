@@ -41,6 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = `/patient/update-appointment/${apptId}/${fname}/${ssn}`;
     });
   });
+
+  document.querySelectorAll('.viewDoctorLocationsBtn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const doctorId = this.getAttribute('doctorId');
+      window.location.href = `/patient/view-doctor-workplace/${doctorId}`;
+    });
+  });
 });
 
 

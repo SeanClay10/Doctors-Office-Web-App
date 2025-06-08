@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Import db queries
 const getOfficeData = require("../services/office-data");
-const getDoctorData = require("../services/doctor-data");
+const { getDoctorData } = require("../services/doctor-data");
 const {
   getAppointmentsForPatient,
   addAppointment,

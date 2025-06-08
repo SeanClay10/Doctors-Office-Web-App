@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Office Locations</title>
+  </head>
+  <body>
+    <div>
+      <h1>Offices</h1>
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+        </tr>
+        <% offices.forEach(office => { %>
+        <tr>
+          <td><%= office.office_name %></td>
+          <td><%= office.location %></td>
+          <td><%= office.phone_number %></td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    <br/>
+    <button type="button" onclick="window.history.back()">Back</button>
+  </body>
+</html>

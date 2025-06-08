@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 // DB queries to grab initial data
 const getOfficeData = require("./services/office-data");
-const getDoctorData = require("./services/doctor-data");
+const { getDoctorData } = require("./services/doctor-data");
 
 // View Engine Setup
 app.set("view engine", "ejs");
