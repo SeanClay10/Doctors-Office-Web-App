@@ -27,6 +27,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // View appointments for a specific patient
+  document.querySelectorAll('.viewPatientAppointmentsBtn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const patientId = this.getAttribute('patientId');
+
+      if (!patientId) {
+        console.error("Patient ID not found");
+        return;
+      }
+      window.location.href = `/employee/view-patient-appointments/${patientId}`;
+    });
+  });
+
   // View appointments for a specific doctor
   document.querySelectorAll('.viewDoctorAppointmentsBtn').forEach((btn) => {
     btn.addEventListener('click', function () {

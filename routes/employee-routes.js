@@ -13,7 +13,6 @@ const {
   updateAppointment,
   deleteAppointment,
 } = require("../services/appointment-data");
-// const { getBillsForPatient } = require("../services/bill-data");
 const { getAllPatientData } = require("../services/patient-data");
 const { getAllEmployeeData } = require("../services/employee-data");
 const { getBillsForPatient } = require("../services/bill-data");
@@ -56,6 +55,21 @@ router.get("/view-doctor-appointments/:id", async (req, res) => {
       await getAppointmentsForDoctor(id);
 
     res.render(`employee/doctor-appointments`, {
+      appointmentsPast: pastAppointments,
+      appointmentsUpcoming: upcomingAppointments,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/view-patient-appointments/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { pastAppointments, upcomingAppointments } =
+      await getAppointmentsForPatient(id);
+
+    res.render("patient/patient-appointments", {
       appointmentsPast: pastAppointments,
       appointmentsUpcoming: upcomingAppointments,
     });
