@@ -13,7 +13,10 @@ const {
   updateAppointment,
   deleteAppointment,
 } = require("../services/appointment-data");
-const { getAllPatientData } = require("../services/patient-data");
+const {
+  getAllPatientData,
+  addNewPatient,
+} = require("../services/patient-data");
 const { getAllEmployeeData } = require("../services/employee-data");
 const { getBillsForPatient } = require("../services/bill-data");
 
@@ -39,8 +42,10 @@ router.get("/view-patient-bill/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const bills = await getBillsForPatient(id);
+    const total_amount = 0; // getTotalBillingBalance(id)
 
     res.render("patient/patient-bills", {
+      total_amount,
       bills,
     });
   } catch (error) {
@@ -73,6 +78,32 @@ router.get("/view-patient-appointments/:id", async (req, res) => {
       appointmentsPast: pastAppointments,
       appointmentsUpcoming: upcomingAppointments,
     });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/register-patient-form", (req, res) => {
+  res.render("employee/add-patient", { error: null });
+});
+
+router.post("/add-patient", async (req, res) => {
+  try {
+    const { fname, lname, phone_number, street, city, state, zip_code, email } =
+      req.body;
+    const patient = {
+      fname,
+      lname,
+      phone_number,
+      street,
+      city,
+      state,
+      zip_code,
+      email,
+    };
+    // Insert into Patient table
+    await addNewPatient(patient);
+    // res.status(200).json({ success: true });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
