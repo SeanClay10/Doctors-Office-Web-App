@@ -53,4 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const patientRegisterBtn = document.querySelector('.addPatientBtn');
+  if (patientRegisterBtn) {
+    patientRegisterBtn.addEventListener('click', function () {
+      window.location.href = '/employee/register-patient-form';
+    });
+  }
+
 });
