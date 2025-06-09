@@ -9,6 +9,7 @@
     <p style="color: red;"><%= error %></p>
   <% } %>
   <form action="/patient/update-appointment/<%= appointment.appointment_id %>/<%= fname %>/<%= ssn %>" method="POST">
+    <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
     <label for="doctor_id">Doctor:</label>
     <select name="doctor_id" id="doctor_id" required>
       <% doctors.forEach(doc => { %>
@@ -24,8 +25,8 @@
                 : (appointment.start_time || '') %>" required><br><br>
     <label for="note">Note:</label>
     <input type="text" name="note" id="note" value="<%= appointment.note || '' %>"><br><br>
-    <button type="submit">Update</button>
-    <button type="button" onclick="window.location.href='/patient/dashboard/<%= fname %>/<%= ssn %>'">Cancel</button>
+    <button type="submit" onclick="window.history.back()">Update</button>
+    <button type="button" onclick="window.history.back()">Cancel</button>
   </form>
 </body>
 </html>

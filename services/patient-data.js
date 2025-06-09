@@ -51,7 +51,37 @@ async function addNewPatient({
   });
 }
 
+async function getPatientById(patientId) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT patient_id, fname, lname, phone_number, email, street, city, state, zip_code
+        FROM Patient
+        WHERE patient_id = ?`,
+      [patientId],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results[0] || null);
+      }
+    );
+  });
+}
+
+async function deletePatient(patientId) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `DELETE FROM Patient WHERE patient_id = ?`,
+      [patientId],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      }
+    );
+  });
+}
+
 module.exports = {
   getAllPatientData: getAllPatientData,
   addNewPatient: addNewPatient,
+  getPatientById: getPatientById,
+  deletePatient: deletePatient,
 };

@@ -43,6 +43,7 @@
             <th class="header-element">Name</th>
             <th class="header-element">Phone Number</th>
             <th class="header-element">Email</th>
+            <th>Delete</th>
           </tr>
           <% employees.forEach(employee => { %>
           <tr class="data-row">
@@ -50,6 +51,11 @@
             <td class="data-element"><%= employee.fname %> <%= employee.lname %></td>
             <td class="data-element"><%= employee.phone_number %></td>
             <td class="data-element"><%= employee.email %></td>
+            <td class="centered">
+              <button type="button" class="delete-employee-btn icon-btn" data-employee-id="<%= employee.employee_id %>">
+                <img src="/images/cancel.png" alt="Delete" width="20" height="20">
+              </button>
+            </td>
           </tr>
           <% }) %>
         </table>
@@ -94,6 +100,7 @@
             <th class="header-element">Address</th>
             <th class="header-element">Appointments</th>
             <th class="header-element">Billing Info</th>
+            <th class="header-element">Delete</th>
           </tr>
           <% patients.forEach(patient => { %>
           <tr class="data-row">
@@ -103,13 +110,23 @@
             <td class="data-row"><%= patient.email %></td>
             <td class="data-row"><%= patient.address %></td>
             <td>
-              <button type="button" class="viewPatientAppointmentsBtn" patientId="<%= patient.patient_id %>">
+              <button type="button" class="viewPatientAppointmentsBtn" patientId="<%= patient.patient_id %>" data-employee-fname="<%= fname %>" data-employee-ssn="<%= ssn %>">
                 View Appointments
               </button>
             </td>
             <td>
-              <button type="button" class="viewPatientBillingStatementsBtn" patientId="<%= patient.patient_id %>">
+              <button
+                type="button"
+                class="viewPatientBillingStatementsBtn"
+                data-patient-id="<%= patient.patient_id %>"
+                data-employee-fname="<%= fname %>"
+                data-employee-ssn="<%= ssn %>">
                 View Billing Info
+              </button>
+            </td>
+            <td class="centered">
+              <button type="button" class="delete-patient-btn icon-btn" data-patient-id="<%= patient.patient_id %>">
+                <img src="/images/cancel.png" alt="Delete" width="20" height="20">
               </button>
             </td>
           </tr>

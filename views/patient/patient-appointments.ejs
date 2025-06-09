@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/events/employee-events.js"></script>
 </head>
 <body>
     <div>
-      <h3>Upcoming Appointments</h3>
-      <button type="button" class="add-appt-btn">
+      <h1>Appointments for <%= fname %></h1>
+      <h2>Upcoming Appointments</h2>
+      <button
+        class="add-appt-btn"
+        data-patient-id="<%= patient.patient_id %>"
+        data-employee-fname="<%= employee_fname %>"
+        data-employee-ssn="<%= employee_ssn %>">
         Add Appointment
       </button>
       <table border="1">
@@ -41,12 +47,12 @@
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
           <td class="centered">
-            <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+            <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>" data-patient-id="<%= ssn %>">
               <img src="/images/update.png" alt="Update" width="31" height="24">
             </button>
           </td>
           <td class="centered">
-            <button type="button" class="cancel-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
+            <button type="button" class="cancel-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>" data-patient-id="<%= ssn %>">
               <img src="/images/cancel.png" alt="Cancel" width="24" height="24">
             </button>
           </td>
@@ -55,7 +61,7 @@
       </table>
     </div>
     <div>
-      <h3>Past Appointments</h3>
+      <h2>Past Appointments</h2>
       <table border="1">
         <tr>
           <th>Date</th>
@@ -88,7 +94,7 @@
       </table>
     </div>
     <br/>
-    <button type="button" onclick="window.history.back()">Back</button>
+    <button type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Back</button>
     <div>
 </body>
 </html>
