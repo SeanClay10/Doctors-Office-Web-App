@@ -43,26 +43,32 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
 
 router.get("/view-patient-bill/:id", async (req, res) => {
   try {
-    const { id } = req.params; // patient id
-    const employee_id = req.query.employee_ssn; // still used for billing
-    const employee_fname = req.query.employee_fname; // <-- add this
-    const employee_ssn = req.query.employee_ssn;     // <-- add this
+    const { id } = req.params; // patient_id
+    const employee_fname = req.query.employee_fname;
+    const employee_ssn = req.query.employee_ssn;
 
+    // Fetch only this patient's bills
     const bills = await getBillsForPatient(id);
-    const total_amount = 0; // getTotalBillingBalance(id)
 
-    // Get appointments for the patient (employee view)
+    // Calculate total balance for this patient
+    const total_amount = bills.reduce((sum, bill) => sum + Number(bill.amount_due), 0);
+
+    // Fetch patient info for name
+    const patient = await getPatientById(id); // Implement this if not already
+
+    // Fetch appointments for this patient
     const { upcomingAppointments, pastAppointments } = await getAppointmentsForPatient(id);
-    const allAppointments = [...upcomingAppointments, ...pastAppointments];
+    const appointments = [...upcomingAppointments, ...pastAppointments];
 
     res.render("patient/patient-bills", {
       total_amount,
       bills,
       patient_id: id,
-      employee_id,      // for billing
-      employee_fname,   // <-- pass to EJS
-      employee_ssn,     // <-- pass to EJS
-      appointments: allAppointments,
+      employee_fname,
+      employee_ssn,
+      employee_id: employee_ssn, // if you use ssn as employee_id
+      appointments,
+      patient_name: patient ? `${patient.fname} ${patient.lname}` : "Unknown Patient"
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
