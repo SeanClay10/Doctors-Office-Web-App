@@ -1,3 +1,4 @@
+<!-- HTML for Main Page -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,37 +9,21 @@
         document.getElementById("login-form").style.display = "block";
       }
     </script>
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
     <h1 class="main-header">Welcome to the Doctor’s Office Database</h1>
 
     <% if (error) { %>
-    <p class="error-message"><%= error %></p>
+    <p class="error-message" style="color: red"><%= error %></p>
     <% } %>
 
     <p class="instruction-text">Select your role to continue:</p>
     <a href="/login/employee"><button type="button" class="btn">Employee</button></a>
     <a href="/login/patient"><button type="button" class="btn">Patient</button></a>
-    <form action="/login" method="POST" class="inline-form">
+    <form action="/login" method="POST" style="display: inline">
       <input type="hidden" name="role" value="new_user" />
       <button type="submit" class="btn">New User</button>
-    </form>
-
-    <form
-      id="login-form"
-      action="/login"
-      method="POST"
-      class="form-container"
-    >
-      <input type="hidden" id="role" name="role" />
-
-      <div class="form-group">
-        <label for="ssn">Enter Your ID (Employee ID or Patient ID):</label>
-        <input type="text" id="ssn" name="ssn" required class="form-control" />
-      </div>
-
-      <button type="submit" class="btn btn-primary">Login</button>
     </form>
   </body>
 </html>

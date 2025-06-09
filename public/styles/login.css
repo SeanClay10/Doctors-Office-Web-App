@@ -26,11 +26,6 @@ body {
     margin-bottom: 20px;
 }
 
-.instruction-text {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-
 .btn {
     background-color: #5fa2a7;
     color: white;
@@ -55,4 +50,14 @@ body {
 
 .btn-primary:hover {
     background-color: #2980b9;
+}
+
+.label {
+    font-size: 24px;
+}
+
+.input {
+    margin: 8px;
+    padding: 5px;
+    font-size: 16px;
 }
