@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Employee</title>
+</head>
+<body>
+    <h1>Register new employee</h1>
+    <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  <form action="/employee/add-employee" method="POST">
+    <label for="fname">First Name:</label>
+    <input type="text" name="fname" id="fname" required><br><br>
+    <label for="lname">Last Name:</label>
+    <input type="text" name="lname" id="lname" required><br><br>
+    <label for="phone_number">Phone Number:</label>
+    <input type="text" name="phone_number" id="phone_number" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br><br>
+    <button type="submit">Register</button>
+    <button type="button" onclick="window.history.back()">Cancel</button>
+  </form>
+</body>
+</html>

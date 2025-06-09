@@ -60,4 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  const addEmployeeBtn = document.querySelector('.addEmployeeBtn');
+  if (addEmployeeBtn) {
+    addEmployeeBtn.addEventListener('click', function () {
+      window.location.href = '/employee/register-employee-form';
+    });
+  }
+
 });

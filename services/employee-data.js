@@ -11,7 +11,22 @@ async function getAllEmployeeData() {
       (err, results) => {
         if (err) reject(err);
         else {
-            resolve(results);
+          resolve(results);
+        }
+      }
+    );
+  });
+}
+
+async function addNewEmployee({ fname, lname, phone_number, email }) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `INSERT INTO Employee (fname, lname, phone_number, email) VALUES (?, ?, ?, ?)`,
+      [fname, lname, phone_number, email],
+      (err, results) => {
+        if (err) reject(err);
+        else {
+          resolve(results);
         }
       }
     );
@@ -20,4 +35,5 @@ async function getAllEmployeeData() {
 
 module.exports = {
   getAllEmployeeData: getAllEmployeeData,
+  addNewEmployee: addNewEmployee,
 };
