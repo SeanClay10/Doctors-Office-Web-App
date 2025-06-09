@@ -15,15 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // View billing info for a specific patient
-  document.querySelectorAll('.viewPatientBillingStatementsBtn').forEach((btn) => {
-    btn.addEventListener('click', function () {
-      const patientId = this.getAttribute('patientId');
-
-      if (!patientId) {
-        console.error("Patient ID not found");
-        return;
-      }
-      window.location.href = `/employee/view-patient-bill/${patientId}`;
+  document.querySelectorAll('.viewPatientBillingStatementsBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const patientId = this.getAttribute('data-patient-id');
+      const employee_fname = this.getAttribute('data-employee-fname');
+      const employee_ssn = this.getAttribute('data-employee-ssn');
+      window.location.href = `/employee/view-patient-bill/${patientId}?employee_fname=${encodeURIComponent(employee_fname)}&employee_ssn=${encodeURIComponent(employee_ssn)}`;
     });
   });
 

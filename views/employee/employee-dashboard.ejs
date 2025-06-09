@@ -107,7 +107,12 @@
               </button>
             </td>
             <td>
-              <button type="button" class="viewPatientBillingStatementsBtn" patientId="<%= patient.patient_id %>">
+              <button
+                type="button"
+                class="viewPatientBillingStatementsBtn"
+                data-patient-id="<%= patient.patient_id %>"
+                data-employee-fname="<%= fname %>"
+                data-employee-ssn="<%= ssn %>">
                 View Billing Info
               </button>
             </td>

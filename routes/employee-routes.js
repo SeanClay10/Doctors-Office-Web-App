@@ -2,6 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
+const db = require("../db/connection");
 
 // Import db queries
 const getOfficeData = require("../services/office-data");
@@ -32,6 +33,7 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
   res.render("employee/employee-dashboard", {
     fname,
     ssn,
+    employee_id: ssn, // <-- Add this line
     offices,
     employees,
     doctors,
@@ -41,13 +43,26 @@ router.get("/dashboard/:fname/:ssn", async (req, res) => {
 
 router.get("/view-patient-bill/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params; // patient id
+    const employee_id = req.query.employee_ssn; // still used for billing
+    const employee_fname = req.query.employee_fname; // <-- add this
+    const employee_ssn = req.query.employee_ssn;     // <-- add this
+
     const bills = await getBillsForPatient(id);
     const total_amount = 0; // getTotalBillingBalance(id)
+
+    // Get appointments for the patient (employee view)
+    const { upcomingAppointments, pastAppointments } = await getAppointmentsForPatient(id);
+    const allAppointments = [...upcomingAppointments, ...pastAppointments];
 
     res.render("patient/patient-bills", {
       total_amount,
       bills,
+      patient_id: id,
+      employee_id,      // for billing
+      employee_fname,   // <-- pass to EJS
+      employee_ssn,     // <-- pass to EJS
+      appointments: allAppointments,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -205,6 +220,22 @@ router.delete("/appointment/:apptId/:patientId", async (req, res) => {
     res.status(200).json({ success: true });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.post("/add-bill", async (req, res) => {
+  try {
+    const { employee_id, employee_fname, employee_ssn, patient_id, appointment_id, amount_due, billing_date, due_date } = req.body;
+    // Insert into BillingStatement table
+    await db.promise().query(
+      `INSERT INTO BillingStatement (employee_id, patient_id, appointment_id, amount_due, billing_date, due_date)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [employee_id, patient_id, appointment_id, amount_due, billing_date, due_date]
+    );
+    res.redirect(`/employee/view-patient-bill/${patient_id}?employee_fname=${encodeURIComponent(employee_fname)}&employee_ssn=${encodeURIComponent(employee_ssn)}`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to add billing statement.");
   }
 });
 
