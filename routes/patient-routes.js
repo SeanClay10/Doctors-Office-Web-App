@@ -83,9 +83,13 @@ router.post("/add-appointment/:fname/:ssn", async (req, res) => {
 router.get("/update-appointment/:apptId/:fname/:ssn", async (req, res) => {
   const { apptId, fname, ssn } = req.params;
   const doctors = await getDoctorData();
-  const { pastAppointments, upcomingAppointments } = await getAppointmentsForPatient(ssn);
-  const appointment = [...pastAppointments, ...upcomingAppointments].find(a => a.appointment_id == apptId);
+  const { pastAppointments, upcomingAppointments } =
+    await getAppointmentsForPatient(ssn);
 
+  // Find the appointment to update
+  const appointment = [...pastAppointments, ...upcomingAppointments].find(
+    (a) => a.appointment_id == apptId
+  );
   res.render("patient/update-appointment", {
     fname,
     ssn,

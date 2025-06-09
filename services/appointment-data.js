@@ -150,7 +150,7 @@ async function updateAppointment(apptId, patientId, doctorId, start_time, end_ti
   });
 }
 
-async function deleteAppointment(apptId, id, role) {
+async function deleteAppointment(apptId, id) {
   return new Promise((resolve, reject) => {
     // Only allow patient to delete their own appointment
     db.query(

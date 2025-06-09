@@ -17,7 +17,7 @@ const { getDoctorData } = require("./services/doctor-data");
 app.set("view engine", "ejs");
 
 // Main page route
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.render("main-page", { error: null });
 });
 
