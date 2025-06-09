@@ -4,48 +4,49 @@
   <head>
     <title>Patient Dashboard</title>
     <script src="/events/patient-events.js"></script>
+    <link rel="stylesheet" href="/styles/dashboards.css"> <link rel="stylesheet" href="/styles/tables.css">
   </head>
   <body data-ssn="<%= ssn %>">
-    <h1>Welcome, <%= fname %>!</h1>
+    <h1 class="main-header">Welcome, <%= fname %>!</h1>
 
     <div>
-      <h2>Instructions</h2>
-      <p>
+      <h2 class="instructions">Instructions</h2>
+      <p class="instructions-text">
         View all office locations, doctors, and your personal appointments and
         billing statements.
       </p>
     </div>
 
     <div>
-      <h3>Offices</h3>
+      <h3 class="table-title">Offices</h3>
       <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Phone Number</th>
+        <tr class="header-row">
+          <th class="header-element">Name</th>
+          <th class="header-element">Location</th>
+          <th class="header-element">Phone Number</th>
         </tr>
         <% offices.forEach(office => { %>
-        <tr>
-          <td><%= office.office_name %></td>
-          <td><%= office.location %></td>
-          <td><%= office.phone_number %></td>
+        <tr class="data-row">
+          <td class="data-element"><%= office.office_name %></td>
+          <td class="data-element"><%= office.location %></td>
+          <td class="data-element"><%= office.phone_number %></td>
         </tr>
         <% }) %>
       </table>
     </div>
 
     <div>
-      <h3>Doctors</h3>
+      <h3 class="table-title">Doctors</h3>
       <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Specialization</th>
-          <th>Offices</th>
+        <tr class="header-row">
+          <th class="header-element">Name</th>
+          <th class="header-element">Specialization</th>
+          <th class="header-element">Offices</th>
         </tr>
         <% doctors.forEach(doc => { %>
-        <tr>
-          <td><%= doc.fname %> <%= doc.lname %></td>
-          <td><%= doc.specialization %></td>
+        <tr class="data-row">
+          <td class="data-element"><%= doc.fname %> <%= doc.lname %></td>
+          <td class="data-element"><%= doc.specialization %></td>
           <td><button type="button" class="viewDoctorLocationsBtn" doctorId="<%= doc.employee_id %>">View Available Offices</button></td>
         </tr>
         <% }) %>
@@ -53,39 +54,39 @@
     </div>
 
     <div>
-      <h3>Upcoming Appointments</h3>
+      <h3 class="table-title">Upcoming Appointments</h3>
       <button type="button" class="add-appt-btn">
         Add Appointment
       </button>
       <table border="1">
-        <tr>
-          <th>Date</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Doctor</th>
-          <th>Note</th>
-          <th>Update</button></th>
-          <th>Delete</button></th>
+        <tr class="header-row">
+          <th class="header-element">Date</th>
+          <th class="header-element">Start</th>
+          <th class="header-element">End</th>
+          <th class="header-element">Doctor</th>
+          <th class="header-element">Note</th>
+          <th class="header-element">Update</button></th>
+          <th class="header-element">Delete</button></th>
         </tr>
         <% appointmentsUpcoming.forEach(app => { %>
-        <tr>
-          <td><%= app.date %></td>
-          <td>
+        <tr class="data-row">
+          <td class="data-element"><%= app.date %></td>
+          <td class="data-element">
             <% if (app.start_time) { %>
               <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td>
+          <td class="data-element">
             <% if (app.end_time) { %>
               <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
-          <td><%= app.note || '—' %></td>
+          <td class="data-element"><%= app.doctor_name %></td>
+          <td class="data-element"><%= app.note || '—' %></td>
           <td class="centered">
             <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>">
               <img src="/images/update.png" alt="Update" width="31" height="24">
@@ -101,56 +102,56 @@
       </table>
     </div>
     <div>
-      <h3>Past Appointments</h3>
+      <h3 class="table-title">Past Appointments</h3>
       <table border="1">
-        <tr>
-          <th>Date</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Doctor</th>
-          <th>Note</th>
+        <tr class="header-row">
+          <th class="header-element">Date</th>
+          <th class="header-element">Start</th>
+          <th class="header-element">End</th>
+          <th class="header-element">Doctor</th>
+          <th class="header-element">Note</th>
         </tr>
         <% appointmentsPast.forEach(app => { %>
-        <tr>
-          <td><%= app.date %></td>
-          <td>
+        <tr class="data-row">
+          <td class="data-element"><%= app.date %></td>
+          <td class="data-element">
             <% if (app.start_time) { %>
               <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td>
+          <td class="data-element">
             <% if (app.end_time) { %>
               <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
-          <td><%= app.note || '—' %></td>
+          <td class="data-element"><%= app.doctor_name %></td>
+          <td class="data-element"><%= app.note || '—' %></td>
         </tr>
         <% }) %>
       </table>
     </div>
     <div>
-      <h3>My Billing Statements</h3>
+      <h3 class="table-title">My Billing Statements</h3>
       <table border="1">
-        <tr>
-          <th>Amount</th>
-          <th>Billing Date</th>
-          <th>Due Date</th>
+        <tr class="header-row">
+          <th class="header-element">Amount</th>
+          <th class="header-element">Billing Date</th>
+          <th class="header-element">Due Date</th>
         </tr>
         <% bills.forEach(bill => { %>
-        <tr>
-          <td>$<%= bill.amount_due.toFixed(2) %></td>
-          <td><%= bill.billing_date %></td>
-          <td><%= bill.due_date %></td>
+        <tr class="data-row">
+          <td class="data-element">$<%= bill.amount_due.toFixed(2) %></td>
+          <td class="data-element"><%= bill.billing_date %></td>
+          <td class="data-element"><%= bill.due_date %></td>
         </tr>
         <% }) %>
       </table>
     </div>
     <p></p>
-    <button type="button" onclick="window.location.href='/'">Log Out</button>
+    <button class="btn" type="button" onclick="window.location.href='/'">Log Out</button>
   </body>
 </html>
