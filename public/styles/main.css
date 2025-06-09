@@ -46,7 +46,6 @@ body {
 
 .btn:hover {
     background-color: #4a8084;
-    transform: translateY(-2px);
 }
 
 .btn-primary {

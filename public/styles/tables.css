@@ -1,0 +1,38 @@
+table {
+    border-width: 3px;
+    border-collapse: collapse;
+}
+
+.table-title {
+    font-size: 24px;
+}
+
+.header-row {
+    font-size: 18px;
+}
+
+.header-element {
+    padding: 6px;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(219, 219, 219);
+}
+
+.data-row {
+    font-size: 16px;
+}
+
+.data-element {
+    padding: 4px;
+}
+
+.viewDoctorLocationsBtn {
+    margin: 4px;
+    background-color: lightsteelblue;
+}
+
+.viewDoctorLocationsBtn:hover {
+    cursor: pointer;
+    background-color: grey;
+}
