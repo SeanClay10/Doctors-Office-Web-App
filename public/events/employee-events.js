@@ -56,7 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const patientRegisterBtn = document.querySelector('.addPatientBtn');
   if (patientRegisterBtn) {
     patientRegisterBtn.addEventListener('click', function () {
-      window.location.href = '/employee/register-patient-form';
+      window.location.href = `/employee/register-patient-form`;
+    });
+  }
+
+  const addEmployeeBtn = document.querySelector('.addEmployeeBtn');
+  if (addEmployeeBtn) {
+    addEmployeeBtn.addEventListener('click', function () {
+      window.location.href = '/employee/register-employee-form';
     });
   }
 

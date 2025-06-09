@@ -18,4 +18,8 @@ router.get("/view-doctor-workplace/:ssn", async (req, res) => {
   }
 });
 
+router.get('/success-page', (_, res) => {
+  res.render('commons/success');
+});
+
 module.exports = router;

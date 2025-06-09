@@ -78,6 +78,7 @@ router.get("/update-appointment/:apptId/:fname/:ssn", async (req, res) => {
   const doctors = await getDoctorData();
   const { pastAppointments, upcomingAppointments } =
     await getAppointmentsForPatient(ssn);
+
   // Find the appointment to update
   const appointment = [...pastAppointments, ...upcomingAppointments].find(
     (a) => a.appointment_id == apptId
