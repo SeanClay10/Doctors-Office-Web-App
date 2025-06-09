@@ -72,7 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (addBtn) {
     addBtn.addEventListener('click', function () {
       const patientId = this.getAttribute('data-patient-id');
-      window.location.href = `/employee/add-appointment/${patientId}`;
+      const employee_fname = this.getAttribute('data-employee-fname');
+      const employee_ssn = this.getAttribute('data-employee-ssn');
+      window.location.href = `/employee/add-appointment/${patientId}?employee_fname=${encodeURIComponent(employee_fname)}&employee_ssn=${encodeURIComponent(employee_ssn)}`;
     });
   }
 

@@ -8,9 +8,13 @@
 </head>
 <body>
     <div>
-      <h1>Billing Statements for <%= fname %></h1>
+      <h1>Appointments for <%= fname %></h1>
       <h2>Upcoming Appointments</h2>
-      <button type="button" class="add-appt-btn" data-patient-id="<%= ssn %>">
+      <button
+        class="add-appt-btn"
+        data-patient-id="<%= patient.patient_id %>"
+        data-employee-fname="<%= employee_fname %>"
+        data-employee-ssn="<%= employee_ssn %>">
         Add Appointment
       </button>
       <table border="1">

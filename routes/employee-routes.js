@@ -100,9 +100,8 @@ router.get("/view-doctor-appointments/:id", async (req, res) => {
 router.get("/view-patient-appointments/:id", async (req, res) => {
   try {
     const { id } = req.params; // patient id
-    // Get employee info from session, query, or authentication
-    const employee_fname = req.query.employee_fname; // or req.session.employee_fname, etc.
-    const employee_ssn = req.query.employee_ssn;     // or req.session.employee_ssn, etc.
+    const employee_fname = req.query.employee_fname;
+    const employee_ssn = req.query.employee_ssn;
 
     const { pastAppointments, upcomingAppointments } = await getAppointmentsForPatient(id);
     const patient = await getPatientById(id);
@@ -113,7 +112,8 @@ router.get("/view-patient-appointments/:id", async (req, res) => {
       ssn: id,
       fname: patient ? patient.fname : "",
       employee_fname,
-      employee_ssn
+      employee_ssn,
+      patient
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -166,6 +166,8 @@ router.post("/add-employee", async (req, res) => {
 // Show add appointment form for a patient (employee view)
 router.get("/add-appointment/:patientId", async (req, res) => {
   const { patientId } = req.params;
+  const employee_fname = req.query.employee_fname;
+  const employee_ssn = req.query.employee_ssn;
   const doctors = await getDoctorData();
   const patient = await getPatientById(patientId);
   res.render("patient/add-appointment", {
@@ -173,18 +175,22 @@ router.get("/add-appointment/:patientId", async (req, res) => {
     ssn: patientId,
     doctors,
     error: null,
-    isEmployee: true
+    isEmployee: true,
+    employee_fname, // <-- pass this
+    employee_ssn 
+
   });
 });
 
 // Handle add appointment form submission (employee view)
 router.post("/add-appointment/:patientId", async (req, res) => {
   const { patientId } = req.params;
-  let { doctor_id, date, start_time, end_time, note } = req.body;
+  let { doctor_id, date, start_time, end_time, note, employee_fname, employee_ssn } = req.body;
   start_time = start_time.replace(":", "");
   try {
     await addAppointment(patientId, doctor_id, date, start_time, end_time, note);
-    res.redirect(`/employee/view-patient-appointments/${patientId}`); // <-- patient appointments
+    // Redirect with employee_fname and employee_ssn in the query string
+    res.redirect(`/employee/view-patient-appointments/${patientId}?employee_fname=${encodeURIComponent(employee_fname)}&employee_ssn=${encodeURIComponent(employee_ssn)}`);
   } catch (err) {
     console.error(err);
     const doctors = await getDoctorData();
@@ -255,7 +261,24 @@ router.delete("/appointment/:apptId/:patientId", async (req, res) => {
 
 router.post("/add-bill", async (req, res) => {
   try {
-    const { employee_id, employee_fname, employee_ssn, patient_id, appointment_id, amount_due, billing_date, due_date } = req.body;
+    let { employee_id, employee_fname, employee_ssn, patient_id, appointment_id, amount_due, billing_date, due_date } = req.body;
+
+    // If employee_id is missing or undefined, look it up using employee_ssn
+    if (!employee_id && employee_ssn) {
+      const [rows] = await db.promise().query(
+        "SELECT employee_id FROM Employee WHERE ssn = ? OR employee_id = ? LIMIT 1",
+        [employee_ssn, employee_ssn]
+      );
+      if (rows.length > 0) {
+        employee_id = rows[0].employee_id;
+      }
+    }
+
+    // If still not found, throw error
+    if (!employee_id) {
+      throw new Error("Could not determine employee_id for billing statement.");
+    }
+
     // Insert into BillingStatement table
     await db.promise().query(
       `INSERT INTO BillingStatement (employee_id, patient_id, appointment_id, amount_due, billing_date, due_date)

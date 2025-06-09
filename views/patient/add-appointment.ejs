@@ -9,6 +9,10 @@
     <p style="color: red;"><%= error %></p>
   <% } %>
   <form action="<%= isEmployee ? `/employee/add-appointment/${ssn}` : `/patient/add-appointment/${fname}/${ssn}` %>" method="POST">
+    <% if (isEmployee) { %>
+      <input type="hidden" name="employee_fname" value="<%= employee_fname %>">
+      <input type="hidden" name="employee_ssn" value="<%= employee_ssn %>">
+    <% } %>
     <label for="doctor_id">Doctor:</label>
     <select name="doctor_id" id="doctor_id" required>
     <% doctors.forEach(doc => { %>
