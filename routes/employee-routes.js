@@ -26,6 +26,7 @@ const {
 const {
   getAllEmployeeData,
   addNewEmployee,
+  deleteEmployee, // <-- add this import
 } = require("../services/employee-data");
 
 const { getBillsForPatient } = require("../services/bill-data");
@@ -298,6 +299,17 @@ router.delete("/patient/:patientId", async (req, res) => {
   const { patientId } = req.params;
   try {
     await deletePatient(patientId);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Delete employee (employee view)
+router.delete("/employee/:employeeId", async (req, res) => {
+  const { employeeId } = req.params;
+  try {
+    await deleteEmployee(employeeId);
     res.status(200).json({ success: true });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

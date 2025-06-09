@@ -42,6 +42,7 @@
             <th>Name</th>
             <th>Phone Number</th>
             <th>Email</th>
+            <th>Delete</th>
           </tr>
           <% employees.forEach(employee => { %>
           <tr>
@@ -49,6 +50,11 @@
             <td><%= employee.fname %> <%= employee.lname %></td>
             <td><%= employee.phone_number %></td>
             <td><%= employee.email %></td>
+            <td class="centered">
+              <button type="button" class="delete-employee-btn icon-btn" data-employee-id="<%= employee.employee_id %>">
+                <img src="/images/cancel.png" alt="Delete" width="20" height="20">
+              </button>
+            </td>
           </tr>
           <% }) %>
         </table>
@@ -119,7 +125,7 @@
             </td>
             <td class="centered">
               <button type="button" class="delete-patient-btn icon-btn" data-patient-id="<%= patient.patient_id %>">
-                <img src="/images/cancel.png" alt="Delete" width="24" height="24">
+                <img src="/images/cancel.png" alt="Delete" width="20" height="20">
               </button>
             </td>
           </tr>

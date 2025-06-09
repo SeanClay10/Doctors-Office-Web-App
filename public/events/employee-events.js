@@ -126,4 +126,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Delete employee
+  document.querySelectorAll('.delete-employee-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const employeeId = this.getAttribute('data-employee-id');
+      if (confirm('Are you sure you want to delete this employee?')) {
+        try {
+          const res = await fetch(`/employee/employee/${employeeId}`, { method: 'DELETE' });
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            alert('Unable to delete employee with outstanding appointments.');
+          }
+        } catch (err) {
+          alert('Error deleting employee.');
+        }
+      }
+    });
+  });
+
 });

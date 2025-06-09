@@ -33,7 +33,21 @@ async function addNewEmployee({ fname, lname, phone_number, email }) {
   });
 }
 
+async function deleteEmployee(employeeId) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `DELETE FROM Employee WHERE employee_id = ?`,
+      [employeeId],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      }
+    );
+  });
+}
+
 module.exports = {
-  getAllEmployeeData: getAllEmployeeData,
-  addNewEmployee: addNewEmployee,
+  getAllEmployeeData,
+  addNewEmployee,
+  deleteEmployee,
 };

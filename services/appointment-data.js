@@ -53,20 +53,17 @@ async function getAppointmentsForPatient(ssn) {
 async function getAppointmentsForDoctor(id) {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT A.appointment_id, A.date, A.start_time, A.end_time, A.note, P.fname AS patient_fname, P.lname AS patient_lname 
-             FROM Appointment A
-             JOIN Patient P ON A.patient_id = P.patient_id
-             JOIN Employee E ON A.employee_id = E.employee_id
-             WHERE A.employee_id = ?`,
+      "CALL getAppointmentsForDoctor(?)",
       [id],
       (err, results) => {
         if (err) return reject(err);
 
+        // results[0] contains the result set from the SELECT in the procedure
         const today = new Date();
         const pastAppointments = [];
         const upcomingAppointments = [];
 
-        results.forEach((r) => {
+        results[0].forEach((r) => {
           const rawDate = new Date(r.date);
           const formattedDate = `${String(rawDate.getMonth() + 1).padStart(
             2,
@@ -83,7 +80,8 @@ async function getAppointmentsForDoctor(id) {
             end_time: r.end_time,
             note: r.note,
             patient_name: `${r.patient_fname} ${r.patient_lname}`,
-            patient_id: r.employee_id
+            patient_id: r.patient_id,
+            doctor_id: r.employee_id
           };
 
           if (rawDate < today) {
