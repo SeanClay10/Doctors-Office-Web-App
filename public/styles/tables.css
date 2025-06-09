@@ -27,12 +27,18 @@ tr:nth-child(even) {
     padding: 4px;
 }
 
-.viewDoctorLocationsBtn {
+.viewDoctorLocationsBtn,
+.viewDoctorAppointmentsBtn,
+.viewPatientAppointmentsBtn,
+.viewPatientBillingStatementsBtn {
     margin: 4px;
     background-color: lightsteelblue;
 }
 
-.viewDoctorLocationsBtn:hover {
+.viewDoctorLocationsBtn:hover,
+.viewDoctorAppointmentsBtn:hover,
+.viewPatientAppointmentsBtn:hover,
+.viewPatientBillingStatementsBtn:hover {
     cursor: pointer;
     background-color: grey;
 }
