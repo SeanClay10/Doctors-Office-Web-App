@@ -3,49 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Appointments</title>
     <script src="/events/employee-events.js"></script>
+    <link rel="stylesheet" href="/styles/dashboards.css">
+    <link rel="stylesheet" href="/styles/tables.css">
 </head>
 <body>
     <div>
-      <h1>Appointments for <%= fname %></h1>
-      <h2>Upcoming Appointments</h2>
+      <h1 class="main-header">Appointments for <%= fname %></h1>
+      <h2 class="table-title">Upcoming Appointments</h2>
       <button
-        class="add-appt-btn"
+        class="add-appt-btn btn"
         data-patient-id="<%= patient.patient_id %>"
         data-employee-fname="<%= employee_fname %>"
         data-employee-ssn="<%= employee_ssn %>">
         Add Appointment
       </button>
       <table border="1">
-        <tr>
-          <th>Date</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Doctor</th>
-          <th>Note</th>
-          <th>Update</button></th>
-          <th>Delete</button></th>
+        <tr class="header-row">
+          <th class="header-element">Date</th>
+          <th class="header-element">Start</th>
+          <th class="header-element">End</th>
+          <th class="header-element">Doctor</th>
+          <th class="header-element">Note</th>
+          <th class="header-element">Update</th>
+          <th class="header-element">Delete</th>
         </tr>
         <% appointmentsUpcoming.forEach(app => { %>
-        <tr>
-          <td><%= app.date %></td>
-          <td>
+        <tr class="data-row">
+          <td class="data-element"><%= app.date %></td>
+          <td class="data-element">
             <% if (app.start_time) { %>
               <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td>
+          <td class="data-element">
             <% if (app.end_time) { %>
               <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
-          <td><%= app.note || '—' %></td>
+          <td class="data-element"><%= app.doctor_name %></td>
+          <td class="data-element"><%= app.note || '—' %></td>
           <td class="centered">
             <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>" data-patient-id="<%= ssn %>">
               <img src="/images/update.png" alt="Update" width="31" height="24">
@@ -61,35 +63,35 @@
       </table>
     </div>
     <div>
-      <h2>Past Appointments</h2>
+      <h2 class="table-title">Past Appointments</h2>
       <table border="1">
-        <tr>
-          <th>Date</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Doctor</th>
-          <th>Note</th>
-          <th>Update</th>
+        <tr class="header-row">
+          <th class="header-element">Date</th>
+          <th class="header-element">Start</th>
+          <th class="header-element">End</th>
+          <th class="header-element">Doctor</th>
+          <th class="header-element">Note</th>
+          <th class="header-element">Update</th>
         </tr>
         <% appointmentsPast.forEach(app => { %>
-        <tr>
-          <td><%= app.date %></td>
-          <td>
+        <tr class="data-row">
+          <td class="data-element"><%= app.date %></td>
+          <td class="data-element">
             <% if (app.start_time) { %>
               <%= app.start_time.length === 8 ? app.start_time.slice(3) : app.start_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td>
+          <td class="data-element">
             <% if (app.end_time) { %>
               <%= app.end_time.length === 8 ? app.end_time.slice(3) : app.end_time %>
             <% } else { %>
               —
             <% } %>
           </td>
-          <td><%= app.doctor_name %></td>
-          <td><%= app.note || '—' %></td>
+          <td class="data-element"><%= app.doctor_name %></td>
+          <td class="data-element"><%= app.note || '—' %></td>
           <td class="centered">
             <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>" data-patient-id="<%= ssn %>">
               <img src="/images/update.png" alt="Update" width="31" height="24">
@@ -100,7 +102,7 @@
       </table>
     </div>
     <br/>
-    <button type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Back</button>
+    <button class="btn" type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Back</button>
     <div>
 </body>
 </html>

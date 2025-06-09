@@ -1,7 +1,7 @@
 // Module Imports & Config
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || parseInt(process.env.ONID_LAST4, 10) || 3000;
 
 require("dotenv").config();
 

@@ -2,16 +2,18 @@
 <html>
 <head>
   <title>Add Doctor</title>
+  <link rel="stylesheet" href="/styles/dashboards.css">
+  <link rel="stylesheet" href="/styles/tables.css">
 </head>
 <body>
-  <h1>Add Doctor</h1>
+  <h1 class="main-header">Add Doctor</h1>
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
   <form method="POST" action="/employee/add-doctor">
     <input type="hidden" name="employee_fname" value="<%= employee_fname %>">
     <input type="hidden" name="employee_ssn" value="<%= employee_ssn %>">
-    <label for="employee_id">Select Employee:</label>
+    <label class="label" for="employee_id">Select Employee:</label>
     <select name="employee_id" id="employee_id" required>
       <% 
         // Collect all doctor employee_ids for filtering
@@ -24,11 +26,11 @@
       %>
     </select>
     <br><br>
-    <label for="specialization">Specialization:</label>
-    <input type="text" name="specialization" id="specialization" required>
+    <label class="label" for="specialization">Specialization:</label>
+    <input class="input" type="text" name="specialization" id="specialization" required>
     <br><br>
-    <button type="submit">Add Doctor</button>
-    <button type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Cancel</button>
+    <button class="btn" type="submit">Add Doctor</button>
+    <button class="btn" type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Cancel</button>
   </form>
 </body>
 </html>

@@ -4,26 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Office Locations</title>
+    <link rel="stylesheet" href="/styles/dashboards.css">
+    <link rel="stylesheet" href="/styles/tables.css">
   </head>
   <body>
     <div>
-      <h1>Offices</h1>
+      <h1 class="main-header">Offices</h1>
       <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Phone Number</th>
+        <tr class="header-row">
+          <th class="header-element">Name</th>
+          <th class="header-element">Location</th>
+          <th class="header-element">Phone Number</th>
         </tr>
         <% offices.forEach(office => { %>
-        <tr>
-          <td><%= office.office_name %></td>
-          <td><%= office.location %></td>
-          <td><%= office.phone_number %></td>
+        <tr class="data-row">
+          <td class="data-element"><%= office.office_name %></td>
+          <td class="data-element"><%= office.location %></td>
+          <td class="data-element"><%= office.phone_number %></td>
         </tr>
         <% }) %>
       </table>
     </div>
     <br/>
-    <button type="button" onclick="window.history.back()">Back</button>
+    <button class="btn" type="button" onclick="window.history.back()">Back</button>
   </body>
 </html>

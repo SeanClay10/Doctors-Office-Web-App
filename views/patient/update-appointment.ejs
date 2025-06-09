@@ -2,16 +2,17 @@
 <html>
 <head>
   <title>Update Appointment</title>
+  <link rel="stylesheet" href="/styles/dashboards.css">
 </head>
 <body>
-  <h1>Update Appointment</h1>
+  <h1 class="main-header">Update Appointment</h1>
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
   <form action="/patient/update-appointment/<%= appointment.appointment_id %>/<%= fname %>/<%= ssn %>" method="POST">
     <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
     <input type="hidden" name="isEmployee" value="<%= typeof isEmployee !== 'undefined' && isEmployee ? 'true' : '' %>">
-    <label for="doctor_id">Doctor:</label>
+    <label class="label" for="doctor_id">Doctor:</label>
     <select name="doctor_id" id="doctor_id" required>
       <% doctors.forEach(doc => { %>
         <option value="<%= doc.employee_id %>" <%= doc.employee_id == appointment.doctor_id ? 'selected' : '' %>>
@@ -19,28 +20,28 @@
         </option>
       <% }) %>
     </select><br><br>
-    <label for="date">Date:</label>
-    <input type="date" name="date" id="date"
+    <label class="label" for="date">Date:</label>
+    <input class="input" type="date" name="date" id="date"
       value="<%= appointment.date ? (() => {
         const parts = appointment.date.split('/');
         return parts.length === 3 ? `${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}` : '';
       })() : '' %>" required><br><br>
-    <label for="start_time">Start Time:</label>
-    <input type="time" name="start_time" id="start_time"
+    <label class="label" for="start_time">Start Time:</label>
+    <input class="input" type="time" name="start_time" id="start_time"
       value="<%= appointment.start_time && appointment.start_time.length === 8
                 ? appointment.start_time.slice(3)
                 : (appointment.start_time || '') %>" required><br><br>
     <% if (typeof isEmployee !== 'undefined' && isEmployee) { %>
-      <label for="end_time">End Time:</label>
-      <input type="time" name="end_time" id="end_time"
+      <label class="label" for="end_time">End Time:</label>
+      <input class="input" type="time" name="end_time" id="end_time"
         value="<%= appointment.end_time && appointment.end_time.length === 8
                   ? appointment.end_time.slice(3)
                   : (appointment.end_time || '') %>"><br><br>
-      <label for="note">Note:</label>
-      <input type="text" name="note" id="note" value="<%= appointment.note || '' %>"><br><br>
+      <label class="label" for="note">Note:</label>
+      <input class="input" type="text" name="note" id="note" value="<%= appointment.note || '' %>"><br><br>
     <% } %>
-    <button type="submit" onclick="window.history.back()">Update</button>
-    <button type="button" onclick="window.history.back()">Cancel</button>
+    <button class="btn" type="submit" onclick="window.history.back()">Update</button>
+    <button class="btn" type="button" onclick="window.history.back()">Cancel</button>
   </form>
 </body>
 </html>

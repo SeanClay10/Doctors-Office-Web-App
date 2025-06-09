@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>Add Appointment</title>
+  <link rel="stylesheet" href="/styles/dashboards.css">
 </head>
 <body>
-  <h1>Add Appointment</h1>
+  <h1 class="main-header">Add Appointment</h1>
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
@@ -13,22 +14,22 @@
       <input type="hidden" name="employee_fname" value="<%= employee_fname %>">
       <input type="hidden" name="employee_ssn" value="<%= employee_ssn %>">
     <% } %>
-    <label for="doctor_id">Doctor:</label>
-    <select name="doctor_id" id="doctor_id" required>
+    <label class="label" for="doctor_id">Doctor:</label>
+    <select class="input" name="doctor_id" id="doctor_id" required>
     <% doctors.forEach(doc => { %>
         <option value="<%= doc.employee_id %>"><%= doc.fname %> <%= doc.lname %> (<%= doc.specialization %>)</option>
     <% }) %>
     </select>
-    <label for="date">Date:</label>
-    <input type="date" name="date" id="date" required><br><br>
-    <label for="start_time">Start Time:</label>
-    <input type="time" name="start_time" id="start_time" required><br><br>
+    <label class="label" for="date">Date:</label>
+    <input class="input" type="date" name="date" id="date" required><br><br>
+    <label class="label" for="start_time">Start Time:</label>
+    <input class="input" type="time" name="start_time" id="start_time" required><br><br>
     <% if (isEmployee) { %>
-      <label for="note">Note:</label>
-      <input type="text" name="note" id="note"><br><br>
+      <label class="label" for="note">Note:</label>
+      <input class="input" type="text" name="note" id="note"><br><br>
     <% } %>
-    <button type="submit" onclick="window.history.back()">Submit</button>
-    <button type="button" onclick="window.history.back()">Cancel</button>
+    <button class="btn" type="submit" onclick="window.history.back()">Submit</button>
+    <button class="btn" type="button" onclick="window.history.back()">Cancel</button>
   </form>
 </body>
 </html>
