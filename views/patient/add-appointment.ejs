@@ -8,7 +8,7 @@
   <% if (error) { %>
     <p style="color: red;"><%= error %></p>
   <% } %>
-  <form action="/patient/add-appointment/<%= fname %>/<%= ssn %>" method="POST">
+  <form action="<%= isEmployee ? `/employee/add-appointment/${ssn}` : `/patient/add-appointment/${fname}/${ssn}` %>" method="POST">
     <label for="doctor_id">Doctor:</label>
     <select name="doctor_id" id="doctor_id" required>
     <% doctors.forEach(doc => { %>
@@ -21,8 +21,8 @@
     <input type="time" name="start_time" id="start_time" required><br><br>
     <label for="note">Note:</label>
     <input type="text" name="note" id="note"><br><br>
-    <button type="submit">Submit</button>
-    <button type="button" onclick="window.location.href='/patient/dashboard/<%= fname %>/<%= ssn %>'">Cancel</button>
+    <button type="submit" onclick="window.history.back()">Submit</button>
+    <button type="button" onclick="window.history.back()">Cancel</button>
   </form>
 </body>
 </html>

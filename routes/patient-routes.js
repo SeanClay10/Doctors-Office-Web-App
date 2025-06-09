@@ -11,6 +11,7 @@ const { getBillsForPatient } = require("../services/bill-data");
 const { deleteAppointment } = require("../services/appointment-data");
 const { addAppointment } = require("../services/appointment-data");
 const { updateAppointment } = require("../services/appointment-data");
+const { getPatientById } = require("../services/patient-data"); // <-- import getPatientById
 
 router.get("/dashboard/:fname/:ssn", async (req, res) => {
   // Get required data to load page
@@ -48,7 +49,13 @@ router.delete("/appointment/:apptId/:ssn", async (req, res) => {
 router.get("/add-appointment/:fname/:ssn", async (req, res) => {
   const { fname, ssn } = req.params;
   const doctors = await getDoctorData();
-  res.render("patient/add-appointment", { fname, ssn, doctors, error: null });
+  res.render("patient/add-appointment", {
+    fname,
+    ssn,
+    doctors,
+    error: null,
+    isEmployee: false,
+  });
 });
 
 // Handle form submission
@@ -59,7 +66,7 @@ router.post("/add-appointment/:fname/:ssn", async (req, res) => {
   start_time = start_time.replace(":", "");
   try {
     await addAppointment(ssn, doctor_id, date, start_time, end_time, note);
-    res.redirect(`/patient/dashboard/${fname}/${ssn}`);
+    res.redirect(`/patient/dashboard/${fname}/${ssn}`); // <-- patient dashboard
   } catch (err) {
     console.error(err);
     const doctors = await getDoctorData();
@@ -76,31 +83,28 @@ router.post("/add-appointment/:fname/:ssn", async (req, res) => {
 router.get("/update-appointment/:apptId/:fname/:ssn", async (req, res) => {
   const { apptId, fname, ssn } = req.params;
   const doctors = await getDoctorData();
-  const { pastAppointments, upcomingAppointments } =
-    await getAppointmentsForPatient(ssn);
-  // Find the appointment to update
-  const appointment = [...pastAppointments, ...upcomingAppointments].find(
-    (a) => a.appointment_id == apptId
-  );
+  const { pastAppointments, upcomingAppointments } = await getAppointmentsForPatient(ssn);
+  const appointment = [...pastAppointments, ...upcomingAppointments].find(a => a.appointment_id == apptId);
+
   res.render("patient/update-appointment", {
     fname,
     ssn,
     doctors,
     appointment,
     error: null,
+    redirectTo: `/patient/dashboard/${fname}/${ssn}`
   });
 });
 
 // Handle update form submission
 router.post("/update-appointment/:apptId/:fname/:ssn", async (req, res) => {
   const { apptId, fname, ssn } = req.params;
-  let { doctor_id, start_time, end_time, note } = req.body;
-  // Convert time if needed
+  let { doctor_id, start_time, end_time, note, redirectTo } = req.body;
   if (start_time) start_time = start_time.replace(":", "");
   if (end_time) end_time = end_time.replace(":", "");
   try {
     await updateAppointment(apptId, ssn, doctor_id, start_time, end_time, note);
-    res.redirect(`/patient/dashboard/${fname}/${ssn}`);
+    res.redirect(redirectTo || `/patient/dashboard/${fname}/${ssn}`);
   } catch (err) {
     console.error(err);
     const doctors = await getDoctorData();

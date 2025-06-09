@@ -51,7 +51,23 @@ async function addNewPatient({
   });
 }
 
+async function getPatientById(patientId) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT patient_id, fname, lname, phone_number, email, street, city, state, zip_code
+        FROM Patient
+        WHERE patient_id = ?`,
+      [patientId],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results[0] || null);
+      }
+    );
+  });
+}
+
 module.exports = {
   getAllPatientData: getAllPatientData,
   addNewPatient: addNewPatient,
+  getPatientById: getPatientById,
 };
