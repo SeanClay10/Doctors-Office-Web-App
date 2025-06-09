@@ -145,4 +145,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Delete doctor
+  document.querySelectorAll('.delete-doctor-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const doctorId = this.getAttribute('data-doctor-id');
+      if (confirm('Are you sure you want to delete this doctor?')) {
+        try {
+          const res = await fetch(`/employee/doctor/${doctorId}`, { method: 'DELETE' });
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            alert('Unable to delete doctor with outstanding appointments.');
+          }
+        } catch (err) {
+          alert('Error deleting doctor.');
+        }
+      }
+    });
+  });
+
 });
