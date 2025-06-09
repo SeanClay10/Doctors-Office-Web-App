@@ -110,14 +110,14 @@ router.post("/add-patient", async (req, res) => {
     };
     // Insert into Patient table
     await addNewPatient(patient);
-    res.status(200).json({ success: true });
+    res.redirect('/common/success-page');
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 });
 
-router.get("/register-employee-form", (_, res) => {
-  res.render("employee/add-employee", { error: null });
+router.get("/register-employee-form/", (_, res) => {
+  res.render(`employee/add-employee`, { error: null });
 });
 
 router.post("/add-employee", async (req, res) => {
@@ -127,7 +127,7 @@ router.post("/add-employee", async (req, res) => {
 
     // Add employee to db
     await addNewEmployee(employee);
-    res.status(200).json({ success: true });
+    res.redirect('/common/success-page');
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
