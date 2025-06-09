@@ -6,7 +6,7 @@ const db = require("../db/connection");
 
 // Import db queries
 const getOfficeData = require("../services/office-data");
-const { getDoctorData } = require("../services/doctor-data");
+const { getDoctorData, addDoctor } = require("../services/doctor-data");
 
 const {
   getAppointmentsForPatient,
@@ -26,7 +26,7 @@ const {
 const {
   getAllEmployeeData,
   addNewEmployee,
-  deleteEmployee, // <-- add this import
+  deleteEmployee,
 } = require("../services/employee-data");
 
 const { getBillsForPatient } = require("../services/bill-data");
@@ -162,6 +162,50 @@ router.post("/add-employee", async (req, res) => {
     res.redirect('/common/success-page');
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// Show add doctor form
+router.get("/add-doctor-form", async (req, res) => {
+  const employees = await getAllEmployeeData();
+  const doctors = await getDoctorData(); // <-- get all doctors for filtering
+  const { employee_fname, employee_ssn } = req.query;
+  res.render("employee/add-doctor", {
+    employees,
+    doctors, // <-- pass doctors to template
+    employee_fname,
+    employee_ssn,
+    error: null
+  });
+});
+
+// Add doctor (from existing employee)
+router.post("/add-doctor", async (req, res) => {
+  try {
+    const { employee_id, specialization, employee_fname, employee_ssn } = req.body;
+    await addDoctor(employee_id, specialization);
+    // Redirect back to dashboard with preserved params
+    res.redirect(`/employee/dashboard/${encodeURIComponent(employee_fname)}/${encodeURIComponent(employee_ssn)}`);
+  } catch (err) {
+    // On error, re-render form with error message and preserved params
+    const employees = await getAllEmployeeData();
+    res.render("employee/add-doctor", {
+      employees,
+      employee_fname: req.body.employee_fname,
+      employee_ssn: req.body.employee_ssn,
+      error: "Failed to add doctor."
+    });
+  }
+});
+
+// Delete doctor (remove from Doctor table)
+router.delete("/doctor/:doctorId", async (req, res) => {
+  const { doctorId } = req.params;
+  try {
+    await require("../services/doctor-data").deleteDoctor(doctorId);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 

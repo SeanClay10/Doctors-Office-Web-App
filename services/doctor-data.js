@@ -1,4 +1,3 @@
-
 const db = require("../db/connection");
 
 async function getDoctorData() {
@@ -39,7 +38,35 @@ async function getDoctorWorkplaces(id) {
   });
 }
 
+async function addDoctor(employee_id, specialization) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `INSERT INTO Doctor (employee_id, specialization) VALUES (?, ?)`,
+      [employee_id, specialization],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      }
+    );
+  });
+}
+
+async function deleteDoctor(employee_id) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `DELETE FROM Doctor WHERE employee_id = ?`,
+      [employee_id],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      }
+    );
+  });
+}
+
 module.exports = {
   getDoctorData: getDoctorData,
   getDoctorWorkplaces: getDoctorWorkplaces,
+  addDoctor,
+  deleteDoctor,
 };
