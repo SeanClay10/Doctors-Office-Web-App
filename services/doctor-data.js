@@ -29,7 +29,7 @@ async function getDoctorWorkplaces(id) {
         else {
           const formattedResults = results.map((o) => ({
             office_name: o.office_name,
-            location: `${o.street} ${o.city}, ${o.state} ${o.zip_code}`,
+            location: `${o.street} ${o.city}, ${o.state} ${o.zip}`,
             phone_number: o.phone_number
           }));
           resolve(formattedResults);
