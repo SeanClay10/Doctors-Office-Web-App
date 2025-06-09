@@ -1,5 +1,5 @@
-// File for getting billing statements from db
 // Authors: Sean Clayton, Ivan Wong, Alex Loomis
+// File for getting billing statements from db
 
 const db = require("../db/connection");
 
