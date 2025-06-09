@@ -69,6 +69,7 @@
           <th>End</th>
           <th>Doctor</th>
           <th>Note</th>
+          <th>Update</th>
         </tr>
         <% appointmentsPast.forEach(app => { %>
         <tr>
@@ -89,6 +90,11 @@
           </td>
           <td><%= app.doctor_name %></td>
           <td><%= app.note || '—' %></td>
+          <td class="centered">
+            <button type="button" class="update-appt-btn icon-btn" data-appt-id="<%= app.appointment_id %>" data-patient-id="<%= ssn %>">
+              <img src="/images/update.png" alt="Update" width="31" height="24">
+            </button>
+          </td>
         </tr>
         <% }) %>
       </table>

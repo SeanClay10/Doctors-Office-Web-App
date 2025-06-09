@@ -265,6 +265,7 @@ router.get("/update-appointment/:apptId/:patientId", async (req, res) => {
     doctors,
     appointment,
     error: null,
+    isEmployee: true,
     redirectTo: `/employee/view-patient-appointments/${patientId}?employee_fname=${employee_fname}&employee_ssn=${employee_ssn}`
   });
 });

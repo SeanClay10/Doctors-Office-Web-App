@@ -23,8 +23,10 @@
     <input type="date" name="date" id="date" required><br><br>
     <label for="start_time">Start Time:</label>
     <input type="time" name="start_time" id="start_time" required><br><br>
-    <label for="note">Note:</label>
-    <input type="text" name="note" id="note"><br><br>
+    <% if (isEmployee) { %>
+      <label for="note">Note:</label>
+      <input type="text" name="note" id="note"><br><br>
+    <% } %>
     <button type="submit" onclick="window.history.back()">Submit</button>
     <button type="button" onclick="window.history.back()">Cancel</button>
   </form>
