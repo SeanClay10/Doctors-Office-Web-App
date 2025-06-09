@@ -66,8 +66,22 @@ async function getPatientById(patientId) {
   });
 }
 
+async function deletePatient(patientId) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `DELETE FROM Patient WHERE patient_id = ?`,
+      [patientId],
+      (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      }
+    );
+  });
+}
+
 module.exports = {
   getAllPatientData: getAllPatientData,
   addNewPatient: addNewPatient,
   getPatientById: getPatientById,
+  deletePatient: deletePatient,
 };

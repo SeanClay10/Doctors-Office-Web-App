@@ -106,4 +106,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Delete patient
+  document.querySelectorAll('.delete-patient-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const patientId = this.getAttribute('data-patient-id');
+      if (confirm('Are you sure you want to delete this patient?')) {
+        try {
+          const res = await fetch(`/employee/patient/${patientId}`, { method: 'DELETE' });
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            alert('Unable to delete patient with outstanding billing statements.');
+          }
+        } catch (err) {
+          alert('Error deleting patient.');
+        }
+      }
+    });
+  });
+
 });

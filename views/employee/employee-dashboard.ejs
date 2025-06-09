@@ -93,6 +93,7 @@
             <th>Address</th>
             <th>Appointments</th>
             <th>Billing Info</th>
+            <th>Delete</th>
           </tr>
           <% patients.forEach(patient => { %>
           <tr>
@@ -114,6 +115,11 @@
                 data-employee-fname="<%= fname %>"
                 data-employee-ssn="<%= ssn %>">
                 View Billing Info
+              </button>
+            </td>
+            <td class="centered">
+              <button type="button" class="delete-patient-btn icon-btn" data-patient-id="<%= patient.patient_id %>">
+                <img src="/images/cancel.png" alt="Delete" width="24" height="24">
               </button>
             </td>
           </tr>

@@ -20,6 +20,7 @@ const {
   getAllPatientData,
   addNewPatient,
   getPatientById,
+  deletePatient,
 } = require("../services/patient-data");
 
 const {
@@ -291,5 +292,17 @@ router.post("/add-bill", async (req, res) => {
     res.status(500).send("Failed to add billing statement.");
   }
 });
+
+// Delete patient (employee view)
+router.delete("/patient/:patientId", async (req, res) => {
+  const { patientId } = req.params;
+  try {
+    await deletePatient(patientId);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 
 module.exports = router;
