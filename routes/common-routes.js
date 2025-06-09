@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handling shared routes between different pages
 
 const express = require('express');

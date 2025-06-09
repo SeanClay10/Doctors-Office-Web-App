@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handing event listeners for Patient dashboard
 
 document.addEventListener("DOMContentLoaded", function () {

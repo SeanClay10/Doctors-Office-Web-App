@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handling Employee related routes
 
 const express = require("express");

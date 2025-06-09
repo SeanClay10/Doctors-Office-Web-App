@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handling event listeners for Employee dashboard
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handling Patient routes
 
 const express = require("express");

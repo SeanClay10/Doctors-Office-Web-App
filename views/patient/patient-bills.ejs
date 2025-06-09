@@ -1,3 +1,4 @@
+<!-- Authors: Sean Clayton, Ivan Wong, Alex Loomis -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +37,6 @@
     <button class="btn" type="button" onclick="window.location.href='/employee/dashboard/<%= employee_fname %>/<%= employee_ssn %>'">Back</button>
     <div>
 
-    <!-- Add this after your "Add Billing Statement" button -->
     <div id="addBillModal" style="display:none; position:fixed; top:20%; left:35%; background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
       <form id="addBillForm" method="POST" action="/employee/add-bill">
         <input type="hidden" name="employee_fname" value="<%= employee_fname %>">

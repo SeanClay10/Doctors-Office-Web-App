@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // Module Imports & Config
 const mysql = require("mysql2");
 require("dotenv").config();

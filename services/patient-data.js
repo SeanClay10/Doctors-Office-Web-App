@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // File for handling Patient db queries
 
 const db = require("../db/connection");

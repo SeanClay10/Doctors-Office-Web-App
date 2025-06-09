@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 const express = require("express");
 const router = express.Router();
 const db = require("../db/connection");

@@ -1,3 +1,4 @@
+// Authors: Sean Clayton, Ivan Wong, Alex Loomis
 // Register user event
 document.addEventListener('DOMContentLoaded', function () {
   const registerBtn = document.querySelector('.register-btn');
